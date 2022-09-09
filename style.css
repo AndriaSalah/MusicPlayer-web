@@ -1,0 +1,148 @@
+body{
+    margin: 0;
+    overflow-x: hidden;
+    width: 100vw;
+    height: 100vh;
+    background-color: #2D2929 ;
+
+}
+*{
+    font-family:'Inter', sans-serif;
+}
+.mainContainer{
+    background-color: #2D2929 ;
+    position: relative;
+    
+}
+
+.imgSlider{
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden; 
+    cursor: grab;
+}
+.imgSlider:active{
+    cursor: grabbing;
+}
+.imgSlider img{
+   margin: 1vw;
+    width: 18vw;
+    height: 18vw;
+    border-radius: 10px;
+}
+.playlist{
+    margin: 2vh 2vh 2vh 2vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #9eccc493;
+    height: 65vh;
+    overflow-y: scroll;
+}
+.song{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+}
+.song img{
+    width:8vh;
+    height: 8vh;
+    padding: 2vw;
+}
+.song button{
+    width: 5vh;
+    height: 5vh;
+    margin-right: 2vw;
+    border-radius: 100%;
+    border: none;
+    font-size: 20px;
+}
+.song h2{
+    margin-right: 55vw;
+}
+.playlist hr{
+    width: 80vw;
+}
+.player{
+    display: flex;
+    align-items: center;
+    position: sticky;
+    bottom: 0px;
+    margin-top: 3vh;
+    height: 12vh;
+    background-color: #2D2929;
+}    
+.player img{
+    width:10vh;
+    height: 10vh;
+    padding: 2vw;
+    
+    
+}
+.player button{
+    width: 5vh;
+    height: 5vh;
+    margin-right: 2vw;
+    border-radius: 100%;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+.player button:hover{
+    background-color: rgb(192, 189, 189);
+}
+.player button img{
+    width: 3vh;
+    height: 3vh;
+    padding: 7px 0 0 0;
+}
+.player div{
+    margin-right: 4vw;
+    margin-left: 2vw;
+    margin-bottom: 4vh;
+    color: aliceblue;
+}
+.player div input{
+    width: 70vw;
+}
+
+::-webkit-scrollbar {
+    width: 10px; 
+    background-color: transparent;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #2D2929;
+    margin-right: 5px;
+    margin-block: 1rem;
+    border-radius: 30px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.5);
+    border-radius: 30px;
+    margin-right: 5px;
+    width: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(85, 85, 85, 0.5);
+  }
+
+  .playlist::-webkit-scrollbar-track {
+    background: #6a868281;
+    margin-right: 5px;
+    margin-block: 1rem;
+    border-radius: 30px;
+  }
+.playlist::-webkit-scrollbar-thumb {
+    background: #a4d1ca81;
+    border-radius: 30px;
+    margin-right: 5px;
+    width: 10px;
+  }
