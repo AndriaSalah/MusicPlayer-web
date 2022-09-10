@@ -18,7 +18,7 @@ body{
 .imgSlider{
     display: flex; 
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     overflow-x: hidden; 
     cursor: grab;
 }
@@ -27,44 +27,89 @@ body{
 }
 .imgSlider img{
    margin: 1vw;
-    width: 18vw;
-    height: 18vw;
+    width: 14vw;
+    height: 14vw;
     border-radius: 10px;
 }
+/* play list css and songs */
 .playlist{
     margin: 2vh 2vh 2vh 2vh;
     display: flex;
     flex-direction: column;
     background-color: #9eccc493;
-    height: 65vh;
+    height: 67vh;
     overflow-y: scroll;
+    border-radius: 10px ;
 }
 .song{
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 10vh;
+    padding-top: 15px ;
+    padding-bottom: 15px;
+    border-radius: 10px;
 }
 .song img{
     width:8vh;
     height: 8vh;
     padding: 2vw;
+    
 }
-.song button{
+.buttons{
+    display: flex;
+    margin-right: 2vw;
+    /* border: solid 1px black; */
+}
+.song .buttons button{
     width: 5vh;
     height: 5vh;
     margin-right: 2vw;
     border-radius: 100%;
     border: none;
     font-size: 20px;
+    transition-duration: 0.1s ;
+    background-color: #bfe9e2;
 }
-.song h2{
-    margin-right: 55vw;
+.song .buttons .addbutton{
+    background-color: transparent;
+    /* margin-left: 20px; */
+   
+}
+.song .buttons button:hover{
+    background-color: #9eccc493;
+}
+.song button img{
+    width: 1.5vw;
+    height: 1.5vw;
+    padding: 4px 0 0 0;
+
+}
+.trackDetails{
+    margin-right: 70vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+.trackDetails h2{
+    width: max-content;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+.trackDetails h3{
+    font-weight: 500;
+    margin-top: 0 ;
 }
 .playlist hr{
     width: 80vw;
 }
+.nowplaying{
+    background-color: #8cf5e393 ;
+}
+/* end of playlist css and songs */
 .player{
+   
     display: flex;
     align-items: center;
     position: sticky;
@@ -73,22 +118,39 @@ body{
     height: 12vh;
     background-color: #2D2929;
 }    
-.player img{
-    width:10vh;
-    height: 10vh;
-    padding: 2vw;
-    
+.playerImg{
+    margin-left: 1vh;
+    width:9vh;
+    height: 9vh;
+    border-radius: 100%;
+    animation: rotate 30s forwards infinite ;
+    animation-play-state: paused;
+}
+
+@keyframes rotate {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(359deg);
+    }
     
 }
+
 .player button{
+    display: flex;
     width: 5vh;
     height: 5vh;
     margin-right: 2vw;
+    margin-left: 1vw;
     border-radius: 100%;
     border: none;
     font-size: 20px;
     cursor: pointer;
     transition-duration: 0.2s;
+    align-items: center;
+    justify-content: center;
+    background-color: #6d6868;
 }
 .player button:hover{
     background-color: rgb(192, 189, 189);
@@ -96,18 +158,56 @@ body{
 .player button img{
     width: 3vh;
     height: 3vh;
-    padding: 7px 0 0 0;
-}
-.player div{
-    margin-right: 4vw;
-    margin-left: 2vw;
-    margin-bottom: 4vh;
-    color: aliceblue;
-}
-.player div input{
-    width: 70vw;
+    padding: 0px 0 0 0;
+    
+    
 }
 
+.player div{
+    margin-right: 1vw;
+    margin-left: 1vw;
+    margin-bottom: 6vh;
+    color: aliceblue;
+}
+.player div h3{
+    font-weight: 100;
+    font-size: 30px;
+    margin-bottom: 1vh;
+}
+.player .trackseeker{
+    width: 60vw;
+}
+
+.volume{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 12vw;
+    bottom: 4vh;
+    right: 1vw;
+    margin: 0;
+    background-color: aliceblue;
+    border-radius: 30px;
+    align-items: center;
+    justify-content: center;
+    
+    visibility: hidden;
+    opacity: 0;
+    transition-duration: 0.5s ;
+}
+.volume h3{
+    color: black;
+}
+.volumeSeeker{
+    width: 10vw;
+    margin-bottom: 2vh;
+}
+
+.player .currentTime , .player .totalDuration{
+    margin: 0px ;
+    margin-top: 12px;
+   width: 45px;
+}
 ::-webkit-scrollbar {
     width: 10px; 
     background-color: transparent;
@@ -146,3 +246,7 @@ body{
     margin-right: 5px;
     width: 10px;
   }
+
+.song .buttons i{
+
+}
