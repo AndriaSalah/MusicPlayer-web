@@ -37,7 +37,7 @@ const musiclibrary = [
     },
     {
         imgPath   : 'Music/Artwork/1.png',
-        musicPath : 'Music/Music/Whatever_it_Takes.flac',
+        musicPath : '/Music/Music/Whatever_It_Takes.flac',
         artistName: 'Imagine Dragons',
         trackName : 'What ever it takes'
     },
@@ -73,7 +73,6 @@ function createSong(songName,artistName,artPath,index){
     var song = document.createElement('div');
     song.classList.add('song');
     playlist.appendChild(song);
-    
     var trackArt = document.createElement('img');
      trackArt.src = artPath;
 
@@ -234,3 +233,5 @@ function nextPrev(direction){
 
     direction == 'right' ? next() : prev()
 }
+
+`<div class="song nowplaying"><img src="Music/Artwork/1.png"><div class="trackDetails"><h2>Imagine Dragons</h2><h3>Believer</h3></div><div class="buttons"><button class="addbutton"><i class="fa-solid fa-plus"></i></button><button onclick="playat(1)"><i class="fa-solid fa-play"></i></button></div></div>`
