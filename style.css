@@ -200,14 +200,13 @@ body{
     flex-direction: column;
     position: absolute;
     width: 15rem !important;
-    bottom: 4vh;
+    bottom: 6rem;
     right: 1vw;
     margin: 0;
     background-color: aliceblue;
     border-radius: 30px;
     align-items: center;
     justify-content: center;
-    
     visibility: hidden;
     opacity: 0;
     transition-duration: 0.5s ;
