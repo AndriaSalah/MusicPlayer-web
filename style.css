@@ -295,7 +295,7 @@ body{
   .volumeSeeker{
     /* transform: rotate(-90deg); */
     width: 6rem;
-    margin-bottom: 4rem;
+   margin-bottom: 2.5rem;
     
   }
   .trackDetails{
