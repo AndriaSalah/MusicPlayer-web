@@ -271,7 +271,7 @@ body{
     .player .next , .player .prev{
         display: none;
     }
-    .player div h3{
+    .player .track h3{
         font-size: 13px;
         text-align: center;
   }
