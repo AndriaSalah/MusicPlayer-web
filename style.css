@@ -315,7 +315,7 @@ body{
     width: 100%;
 }
 html{
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 }
