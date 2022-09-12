@@ -225,7 +225,7 @@ body{
     margin-top: 12px;
     min-width: fit-content;
     overflow: hidden;
-    width = 3rem;
+    width : 3rem;
     color : white;
 }
 ::-webkit-scrollbar {
