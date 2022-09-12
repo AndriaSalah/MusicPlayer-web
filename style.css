@@ -179,14 +179,14 @@ body{
     height: 3vh;
 }
 
-.player div{
+.player .track{
     margin-right: 1rem;
     margin-left: 1rem;
     margin-bottom: 1.5rem;
     color: aliceblue;
     width: 52vw;
 }
-.player div h3{
+.player .track h3{
     font-weight: 100;
     font-size: 30px;
     margin-bottom: 1vh;
@@ -223,7 +223,8 @@ body{
 .player .currentTime , .player .totalDuration{
     margin: 0px ;
     margin-top: 12px;
-    width: max-content;
+    min-width: fit-content;
+    overflow: hidden;
 }
 ::-webkit-scrollbar {
     width: 10px; 
