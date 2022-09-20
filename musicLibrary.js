@@ -1,7 +1,10 @@
+import { MusicLibraries } from "./Albums.js"
+
+
 let currentTrack    = document.createElement('audio')
 let trackseeker     = document.querySelector('.trackseeker')
 let playerimg       = document.querySelector('.playerImg')
-let playlist        = document.querySelector('.playlist') 
+export let playlist = document.querySelector('.playlist') 
 let playerTrackName = document.querySelector('.playerTrackName')
 let volumepanel     = document.querySelector('.volume')
 let volumeseeker    = document.querySelector('.volumeSeeker')
@@ -9,72 +12,37 @@ let currentTime     = document.querySelector('.currentTime')
 let totalDuration   = document.querySelector('.totalDuration')
 let volumeButton    = document.querySelector('.volumeButton')
 let shuffleButton   = document.querySelector('.shuffleButton')
+let playbuttonimg   = document.querySelector('.fa-solid')
+let playbutton      = document.querySelector('.playbutton')
+let prv             = document.querySelector('.prev') 
+let nxt             = document.querySelector('.next') 
+let albumdetails    = document.querySelector('.details:nth-of-type(1)')
+let rocklibrary     = document.querySelector('.one')
+let poplibrary      = document.querySelector('.two')
+let imaginelibrary  = document.querySelector('.four')
+let mixlibrary      = document.querySelector('.three')
+let sadnchill      = document.querySelector('.five')
 let shuffling = false
 let rand_check = false
 let currentIndex = 0
 let isplaying = false
 let volumeshown =false
-
-const musiclibrary = [
-
-    {
-        imgPath   : 'Music/Artwork/1.png',
-        musicPath : 'Music/Music/Believer.flac',
-        artistName: 'Imagine Dragons',
-        trackName : 'Believer'
-    },
-    {
-        imgPath   : 'Music/Artwork/2.png',
-        musicPath : 'Music/Music/Tiptoe.flac',
-        artistName: 'Imagine Dragons',
-        trackName : 'Tiptoe'
-    },
-    {
-        imgPath   : 'Music/Artwork/2.png',
-        musicPath : 'Music/Music/Radioactive.flac',
-        artistName: 'Imagine Dragons',
-        trackName : 'Radioactive'
-    },
-    {
-        imgPath   : 'Music/Artwork/1.png',
-        musicPath : '/Music/Music/Whatever_It_Takes.flac',
-        artistName: 'Imagine Dragons',
-        trackName : 'What ever it takes'
-    },
-    {
-        imgPath   : 'Music/Artwork/2.png',
-        musicPath : 'Music/Music/I_Dont _Know_Why.flac',
-        artistName: 'Imagine Dragons',
-        trackName : 'I Dont know why'
-    },
-    {
-        imgPath   : 'Music/Artwork/2.png',
-        musicPath : 'Music/Music/Its_Time.flac',
-        artistName: 'Imagine Dragons',
-        trackName : 'Its time'
-    }
-
-]
-// initialising the play list and setting the volume to 20 % and loading the track from the playlist
+let currentLibrary 
 
 
-for ( var i = 0 ; i < musiclibrary.length ; i ++) {
-    var songDetails = musiclibrary[i]
-    createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
-    
-}
-currentTrack.volume = volumeseeker.value / 100
 
 
-loadTrack()
 
-//----------------------------------------------------------------------------------------------------
 function createSong(songName,artistName,artPath,index){
     var song = document.createElement('div');
     song.classList.add('song');
     playlist.appendChild(song);
+
     var trackArt = document.createElement('img');
+    if (artPath != ''){
      trackArt.src = artPath;
+    }
+    else trackArt.src = '/Music/Artwork/default.png'
 
     var trackDetails = document.createElement('div');
     trackDetails.classList.add('trackDetails');
@@ -99,17 +67,17 @@ function createSong(songName,artistName,artPath,index){
     addbuttonImg.classList.add("fa-plus")
     addButton.appendChild(addbuttonImg)
 
-    var playButton = document.createElement('button');;
-    var playButtonImg = document.createElement('i');
-    playButtonImg.classList.add("fa-solid")
-    playButtonImg.classList.add("fa-play")
-    playButton.appendChild(playButtonImg);
-    playButton.setAttribute('onclick',`playat(${index+1})`);
+    var playButtonimg = document.createElement('button');;
+    var playButtonimgImg = document.createElement('i');
+    playButtonimgImg.classList.add("fa-solid")
+    playButtonimgImg.classList.add("fa-play")
+    playButtonimg.appendChild(playButtonimgImg);
+    playButtonimg.addEventListener('click',() => playat(index+1));
     
 
 
     buttons.appendChild(addButton);
-    buttons.appendChild(playButton);
+    buttons.appendChild(playButtonimg);
     
     var linebreak = document.createElement('hr');
 
@@ -124,22 +92,32 @@ function createSong(songName,artistName,artPath,index){
 
 }    
 
-let nowplaying      = document.querySelector('.song:nth-of-type(1)')
-nowplaying.classList.add('nowplaying')
 
 
-function loadTrack(){
-    playerTrackName.textContent = musiclibrary[currentIndex].trackName;
-    playerimg.src = musiclibrary[currentIndex].imgPath;
-    currentTrack.src = musiclibrary[currentIndex].musicPath;
+
+function loadTrack(libraryNumber = 4){
+    // clearInterval(updateTimer);
+    resetValues();
+
+    playerTrackName.textContent = MusicLibraries[libraryNumber][currentIndex].trackName;
+    if(MusicLibraries[libraryNumber][currentIndex].imgPath != ''){
+        playerimg.src = MusicLibraries[libraryNumber][currentIndex].imgPath;
+    }
+        else playerimg.src="Music/Artwork/default.png"
+    currentTrack.src = MusicLibraries[libraryNumber][currentIndex].musicPath;
     currentTrack.load();
-    updateTimer = setInterval(setUpdate, 1000);
+    let updateTimer = setInterval(setUpdate, 1000);
     currentTrack.addEventListener('ended',next);
 }
+function resetValues() {
+    currentTime.textContent = "00:00";
+    totalDuration.textContent = "00:00";
+    trackseeker.value = 0;
+  }
 function next(){
     
     if (!shuffling){
-    currentIndex < musiclibrary.length-1 ?
+    currentIndex < MusicLibraries[4].length-1 ?
     (currentIndex ++ , playat(currentIndex+1)) : (currentIndex = 0 , playat(currentIndex+1))
     }
     else shuffle()
@@ -158,18 +136,17 @@ function prev(){
 
 function play(){
     isplaying?
-    (currentTrack.pause() , isplaying = false , playerimg.style.animationPlayState = 'paused' ):
-    (currentTrack.play(), isplaying = true , playerimg.style.animationPlayState = 'running')
+    (currentTrack.pause() , isplaying = false , playerimg.style.animationPlayState = 'paused',playbuttonimg.classList.replace('fa-pause','fa-play')
+    ):
+    (currentTrack.play(), isplaying = true , playerimg.style.animationPlayState = 'running',playbuttonimg.classList.replace('fa-play','fa-pause'))
 }
 
-function playtrack(){
-    currentTrack.play()
-}
 
 function showvolumepanel(){
+    console.log('clicked')
     volumeshown?
-    (volumepanel.style.visibility = 'hidden',volumepanel.style.opacity = 0, volumeshown = false, volumeButton.style.backgroundColor = '#6d6868') :
-    (volumepanel.style.visibility = 'visible', volumepanel.style.opacity = 1,volumeshown = true,volumeButton.style.backgroundColor = 'rgb(192, 189, 189)')
+    (volumepanel.style.visibility = 'hidden',volumepanel.style.opacity = 0, volumeshown = false, volumeButton.style.backgroundColor = '#cccccc') :
+    (volumepanel.style.visibility = 'visible', volumepanel.style.opacity = 1,volumeshown = true,volumeButton.style.backgroundColor = 'rgb(149 163 222)')
 }
 
 
@@ -199,19 +176,26 @@ function setUpdate(){
 
 
 function playat(index){
+    playListPlayButton.classList.replace('fa-pause','fa-play')
     nowplaying.classList.remove('nowplaying');
     nowplaying = document.querySelector(`.song:nth-of-type(${index})`)
     nowplaying.classList.add('nowplaying');
+    playListPlayButton = document.querySelector(`.song:nth-of-type(${index}) button:nth-of-type(2) i`)
+    playListPlayButton.classList.replace('fa-play','fa-pause')
+    
     
     currentIndex = index-1;
-    loadTrack();
+    loadTrack(currentLibrary);
+    isplaying = true
+    playbuttonimg.classList.replace('fa-play','fa-pause')
+    playerimg.style.animationPlayState = 'running'
     currentTrack.play();
 }
 
 function shuffle(){
     rand_check = false
     while(!rand_check){
-    let random = Math.floor(Math.random()*(musiclibrary.length -1))
+    let random = Math.floor(Math.random()*(MusicLibraries[4].length -1))
         if (currentIndex != random){
             rand_check = true
             currentIndex = random
@@ -221,8 +205,8 @@ function shuffle(){
 
     }
 function enableshuffle(){
-    shuffling? (shuffling=false , shuffleButton.style.backgroundColor = '#6d6868'):
-    (shuffling = true , shuffleButton.style.backgroundColor = 'rgb(192, 189, 189)')
+    shuffling? (shuffling=false , shuffleButton.style.backgroundColor = '#cccccc'):
+    (shuffling = true , shuffleButton.style.backgroundColor = 'rgb(149 163 222)')
 }
 
 function seekTo(){
@@ -234,4 +218,54 @@ function nextPrev(direction){
     direction == 'right' ? next() : prev()
 }
 
-`<div class="song nowplaying"><img src="Music/Artwork/1.png"><div class="trackDetails"><h2>Imagine Dragons</h2><h3>Believer</h3></div><div class="buttons"><button class="addbutton"><i class="fa-solid fa-plus"></i></button><button onclick="playat(1)"><i class="fa-solid fa-play"></i></button></div></div>`
+function loadLibrary(libraryNumber){
+    playlist.innerHTML=''
+    currentIndex = 0
+    currentLibrary = libraryNumber;
+    for ( var i = 0 ; i < MusicLibraries[libraryNumber].length ; i ++) {
+        var songDetails = MusicLibraries[libraryNumber][i]
+        console.log(songDetails)
+        createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
+        
+    }
+    loadTrack(libraryNumber)
+}
+
+currentTrack.preload = 'metadata'
+playbutton.addEventListener('click',() =>play());
+trackseeker.addEventListener('input',() =>seekTo());
+shuffleButton.addEventListener('click',() =>enableshuffle());
+nxt.addEventListener('click',() =>nextPrev('right'));
+prv.addEventListener('click',() =>nextPrev('left'));
+volumeButton.addEventListener('click',() =>showvolumepanel());
+volumeseeker.addEventListener('input',() => setvolume());
+volumeseeker.addEventListener('mouseout',()=>{setTimeout(()=>{volumepanel.style.visibility = 'hidden'
+                                            volumepanel.style.opacity = 0
+                                            volumeshown = false
+                                            volumeButton.style.backgroundColor = '#cccccc'},3000)
+                                        })
+rocklibrary.addEventListener('click',()=>loadLibrary(0));
+poplibrary.addEventListener('click',()=>loadLibrary(1));
+imaginelibrary.addEventListener('click',()=>loadLibrary(2));
+mixlibrary.addEventListener('click',()=>loadLibrary(4));
+sadnchill.addEventListener('click',()=>loadLibrary(3));
+
+    
+
+
+// initialising the defaukt playlist and setting the volume to 20 % and loading the tracks from the playlists
+for ( var i = 0 ; i < MusicLibraries[4].length ; i ++) {
+    var songDetails = MusicLibraries[4][i]
+    console.log(songDetails)
+    createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
+    
+}
+currentTrack.volume = volumeseeker.value / 100
+
+let nowplaying = document.querySelector('.song:nth-of-type(1)')
+nowplaying.classList.add('nowplaying')
+let playListPlayButton = document.querySelector(`.song:nth-of-type(1) button:nth-of-type(2) i`)
+loadTrack()
+
+
+//----------------------------------------------------------------------------------------------------

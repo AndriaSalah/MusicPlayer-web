@@ -4,58 +4,84 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Andrias-Music</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+   
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="mainContainer">
-        <!-- img slider -->
+        <!-- Library slider -->
+        <h2 id="title">Music Libraries</h2>
         <div class="imgSlider">
-            <img src="Music/Artwork/1.png" alt="">
-            <img src="Music/Artwork/2.png" alt="">
-            <img src="Music/Artwork/1.png" alt="">
-            <img src="Music/Artwork/2.png" alt="">
-            <img src="Music/Artwork/1.png" alt="">
-            <img src="Music/Artwork/2.png" alt="">
+            <div class="albums one">
+                <p id="libraryTitle">Rock</p>
+                <span class="details" ">
+                <p>9 Songs</p>
+                </span>
+            </div>
+            <div class="albums two">
+                <p id="libraryTitle">Pop</p>
+                <span class="details">
+                    <p>20 Songs</p>
+                    </span>
+            </div>
+            <div class="albums four">
+                <p id="libraryTitle">Imagine Dragons</p>
+                <span class="details">
+                    <p>6 Songs</p>
+                    </span>
+            </div>
+            <div class="albums three">
+                <p id="libraryTitle">Daily mix</p>
+                <span class="details"></span>
+            </div>
+            <div class="albums five">
+                <p id="libraryTitle">Sad n Chill</p>
+                <span class="details">
+                    <p>33 Songs</p>
+                    </span>
+            </div>
         </div>
-        <!-- end of img slider -->
+        <img src="/Music/ChillnSad/Angèle - Ta Reine A COLORS SHOW.mp3" alt="" srcset="">
+        <!-- end of Library slider -->
 
         <!-- playlist -->
         <div class="playlist">
         </div>
         <!-- end of playlist -->
          
-        <!-- Player -->
+        <!-- Player bar -->
         <div class="player">
+            
             <img class="playerImg" src="/Music/artWork/2.png" alt="">
-            <button onclick="play()"><i class="fa-solid fa-play"></i></button>
+            <button class="playbutton" ><i class="fa-solid fa-play"></i></button>
             <div class="currentTime">00:00</div>
-            <div>
+            <div class="track">
                 <h3 class="playerTrackName"></h3>
-                <input class="trackseeker" onchange="seekTo()" type="range" value= 0>
+                <input class="trackseeker" type="range" value= 0>
             </div>
             <div class="totalDuration">00:00</div>
-
-            <button class="prev"onclick="nextPrev('left')"><i class="fa-solid fa-angle-left"></i></button>
-            <button class="next"onclick="nextPrev('right')"><i class="fa-solid fa-angle-right"></i></button>
-            <button class="shuffleButton" onclick="enableshuffle()"><i class="fa-solid fa-shuffle"></i></button>
-            <button class="volumeButton" onclick="showvolumepanel()"><i class="fa-solid fa-volume-high"></i></button>
-           
+            <div style="display: flex;">
+            <button class="prev"><i class="fa-solid fa-angle-left"></i></button>
+            <button class="next"><i class="fa-solid fa-angle-right"></i></button>
+            <button class="shuffleButton" ><i class="fa-solid fa-shuffle"></i></button>
+            <button class="volumeButton" ><i class="fa-solid fa-volume-high"></i></button>
             <div class="volume">
                 <h3>Volume</h3>
-                <input class="volumeSeeker" onchange="setvolume()"    type="range" value="20" >
+                <input class="volumeSeeker"    type="range" value="12" min="0" max="100">
             </div>
         </div>
-        <!-- end of player -->
+    </div>
+        <!-- end of player bar -->
     </div> 
 
 
-    <script src="/script.js"></script>
-    <script src="/musicLibrary.js"></script>
+    <script type="module" src="/Albums.js"></script>
+    <script type="module" src="/musicLibrary.js"></script>
 </body>
 
 </html>
