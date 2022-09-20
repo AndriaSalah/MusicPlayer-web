@@ -19,7 +19,7 @@ const musiclibrary = [
 
     {
         imgPath   : 'Music/Artwork/1.png',
-        musicPath : 'Music/Music/Believer.flac',
+        musicPath : 'https://drive.google.com/file/d/1Eoz4lNy9doY117n7ZLWQlVf4qjbNCMVS/view?usp=sharing',
         artistName: 'Imagine Dragons',
         trackName : 'Believer'
     },
