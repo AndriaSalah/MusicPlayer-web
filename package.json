@@ -1,0 +1,11 @@
+{ "type": "module" ,
+  "name": "music_player",
+  "version": "1.0.0",
+  "description": "A modern designed Music player",
+  "main": "musicLibrary.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,193 @@
+html{
+    width: 100% ;
+    height: 99%;
+}
+body{
+    margin: 0;
+    overflow-x: hidden;
+    /* overflow-y: hidden; */
+    width: 100%;
+    height: 100%;
+    background-color: #24293E ;
+    font-family:'Inter', sans-serif;
+}
+
+
+.mainContainer{
+    background-color: #24293E ;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.mainContainer #title{
+    color: white;
+    font-weight: 100;
+    font-size:38px;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/* beginning of the Library slider */
+.imgSlider{
+    display: flex; 
+    align-items: center;
+    overflow-x: auto; 
+    padding: 1vw;
+    width: 95%;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+/* a general css selector for the libraries/albums */
+.albums{
+    margin-left: 2vw;
+    aspect-ratio: 1/1;
+    width: 16rem;
+    border-radius: 10px;
+    min-width: 12rem;
+    position: relative;
+    font-weight: bold;
+}
+/* specifying a background image to each album */
+/* we can remove the classes and use nth-child pseudo class if we want to */
+/* but it will be more accurate for selection in js */
+.one{
+    background-image: url(/Music/Artwork/rock.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.two{
+    background-image: url(/Music/Artwork/pop.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.three{
+    background-image: url(/Music/Artwork/1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.three p{
+    margin-bottom: 1.5rem;
+}
+.four{
+    background-image: url(/Music/Artwork/imagine.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.five{
+    background-image: url(/Music/Artwork/slow.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* the details that will be displayed when on the Music library when hovered  */
+.details {
+    border-radius: 10px;
+    display: none;
+    opacity: 0;
+    background-color: #1f1c1cd7;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-align: left;
+    justify-content: flex-end;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.details p{
+    position:absolute ;
+    bottom: -5rem;
+    left: 1.5rem;
+    font-size: 20px;
+    font-weight: 100;
+    margin: 0;
+}
+#libraryTitle{
+    position: absolute;
+    color: white;
+    text-decoration: solid black 1px;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    font-size: 30px;
+    visibility: visible;
+    opacity: 1;
+    transition-duration: 0.2s;
+    margin: 0;
+    z-index: 1;
+}
+
+.albums:hover .details{
+    display: flex;
+    opacity: 1;
+}
+.albums:hover .details p{
+    bottom: 1rem;
+    left: 1.5rem;
+}
+ .albums:hover #libraryTitle{
+    bottom: 3rem;
+ }
+
+
+.imgSlider img{
+    margin-left: 1vw;
+    aspect-ratio: 1/1;
+    width: 16rem;
+    border-radius: 10px;
+}
+/* End of the Library slider */
+
+
+
+::-webkit-scrollbar {
+    display: none;
+  }
+
+
+
+  .imgSlider::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.76);
+    margin-right: 5px;
+    margin-block: 0.5rem;
+    border-radius: 30px;
+  }
+.imgSlider::-webkit-scrollbar-thumb {
+    background: #cccccc88;
+    border-radius: 30px;
+    margin-right: 5px;
+    height: 10px;
+  }
+
+  @media only screen and (max-width :690px){
+    
+.imgSlider img{
+    width: 20vh;
+  }
+  
+.imgSlider{
+    width: 94%;
+}
+html{
+   width: 100%;
+   height: 100%;
+   overflow-y: hidden;
+}
+.imgSlider::-webkit-scrollbar-track {
+    background:transparent;
+
+  }
+.imgSlider::-webkit-scrollbar-thumb {
+    background: transparent;
+
+  }
+
+ .mainContainer #title{
+    margin-top:20px ;
+    margin-left: 10px;
+  }
+
+}
+
