@@ -1,4 +1,4 @@
-import { MusicLibraries } from "./Albums.js"
+import { MusicLibraries } from "/scripts/albums.js"
 import { expandButtons, expandPlayer, expandPlayerimg, expandTime } from "./playerExpansion.js"
 
 
