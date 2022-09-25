@@ -1,6 +1,6 @@
 html{
     width: 100% ;
-    height: 99%;
+    height: 100%;
 }
 body{
     margin: 0;
@@ -169,11 +169,6 @@ body{
   
 .imgSlider{
     width: 94%;
-}
-html{
-   width: 100%;
-   height: 100%;
-   overflow-y: hidden;
 }
 .imgSlider::-webkit-scrollbar-track {
     background:transparent;
