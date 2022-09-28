@@ -36,7 +36,7 @@ let volumeshown            = false
 let currentLibrary 
 let updateTimer
 let volumePanelTimer
-var oldIndex = null
+var oldIndex = 1
 
 
 function createSong(songName,artistName,artPath,index){
@@ -161,7 +161,6 @@ function play(){
 
 function showvolumepanel(){
     
-    console.log('clicked')
     
     if(volumeshown){
         volumepanel.style.visibility = 'hidden'
@@ -205,7 +204,6 @@ function setUpdate(){
 
 
 function playat(index){
-    
     if(index !== oldIndex){
     nowplaying.classList.remove('nowplaying');
     nowplaying = document.querySelector(`.song:nth-of-type(${index})`)
@@ -219,13 +217,8 @@ function playat(index){
     playbuttonimg.classList.replace('fa-play','fa-pause')
     currentTrack.play();
     }
-    else{
-        playListPlayButton.classList.replace('fa-pause','fa-play') 
-        playbuttonimg.classList.replace('fa-pause','fa-play') 
-        isplaying = false
-        currentTrack.pause();
-    }
 
+    else play();
 }
 
 function shuffle(){
@@ -260,7 +253,6 @@ function loadLibrary(libraryNumber){
     currentLibrary = libraryNumber;
     for ( var i = 0 ; i < MusicLibraries[libraryNumber].length ; i ++) {
         var songDetails = MusicLibraries[libraryNumber][i]
-        console.log(songDetails)
         createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
         
     }
@@ -298,7 +290,6 @@ expandbutton.addEventListener('click',()=>expand())
 // initialising the defaukt playlist and setting the volume to 20 % and loading the tracks from the playlists
 for ( var i = 0 ; i < MusicLibraries[4].length ; i ++) {
     var songDetails = MusicLibraries[4][i]
-    console.log(songDetails)
     createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
     
 }
