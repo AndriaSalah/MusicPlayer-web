@@ -177,46 +177,46 @@ let pop =[
     
 ]
 let mix = []
-// const imagineDragons = [
+const imagineDragons = [
 
-//     {
-//         imgPath   : 'Music/Artwork/1.png',
-//         musicPath : 'Music/Music/Believer.flac',
-//         artistName: 'Imagine Dragons',
-//         trackName : 'Believer'
-//     },
-//     {
-//         imgPath   : 'Music/Artwork/2.png',
-//         musicPath : 'Music/Music/Tiptoe.flac',
-//         artistName: 'Imagine Dragons',
-//         trackName : 'Tiptoe'
-//     },
-//     {
-//         imgPath   : 'Music/Artwork/2.png',
-//         musicPath : 'Music/Music/Radioactive.flac',
-//         artistName: 'Imagine Dragons',
-//         trackName : 'Radioactive'
-//     },
-//     {
-//         imgPath   : 'Music/Artwork/1.png',
-//         musicPath : '/Music/Music/Whatever_It_Takes.flac',
-//         artistName: 'Imagine Dragons',
-//         trackName : 'What ever it takes'
-//     },
-//     {
-//         imgPath   : 'Music/Artwork/2.png',
-//         musicPath : 'Music/Music/I_Dont _Know_Why.flac',
-//         artistName: 'Imagine Dragons',
-//         trackName : 'I Dont know why'
-//     },
-//     {
-//         imgPath   : 'Music/Artwork/2.png',
-//         musicPath : 'Music/Music/Its_Time.flac',
-//         artistName: 'Imagine Dragons',
-//         trackName : 'Its time'
-//     }
+    {
+        imgPath   : 'Music/Artwork/1.png',
+        musicPath : 'https://drive.google.com/uc?id=1Jm7IqCOg70Rw2LXmQObz919m2SDuWkH1',
+        artistName: 'Imagine Dragons',
+        trackName : 'Believer'
+    },
+    {
+        imgPath   : 'Music/Artwork/2.png',
+        musicPath : 'https://drive.google.com/uc?id=1q3Yn5FFfytkHFJAlJyrpE_9nG1y2iJWQ',
+        artistName: 'Imagine Dragons',
+        trackName : 'Tiptoe'
+    },
+    {
+        imgPath   : 'Music/Artwork/2.png',
+        musicPath : 'https://drive.google.com/uc?id=1SuV93AH5g4apAH3NZr1Jqee27NRkE87s',
+        artistName: 'Imagine Dragons',
+        trackName : 'Radioactive'
+    },
+    {
+        imgPath   : 'Music/Artwork/1.png',
+        musicPath : 'https://drive.google.com/uc?id=19i7KUymG01r_RNYWnWqSrjUn13c2csSc',
+        artistName: 'Imagine Dragons',
+        trackName : 'What ever it takes'
+    },
+    {
+        imgPath   : 'Music/Artwork/2.png',
+        musicPath : 'https://drive.google.com/uc?id=1FQz4jYZiUW0n8OSDZb5y_a1jaShvoVc-',
+        artistName: 'Imagine Dragons',
+        trackName : 'I Dont know why'
+    },
+    {
+        imgPath   : 'Music/Artwork/2.png',
+        musicPath : 'https://drive.google.com/uc?id=1M2OtK7Py_ufrGBTPOQUiCMka6CYBDd4l',
+        artistName: 'Imagine Dragons',
+        trackName : 'Its time'
+    }
 
-// ]
+]
 const sadnchill = [
     {
         imgPath   : '',
@@ -422,9 +422,9 @@ const sadnchill = [
 
 
 ]
-export let MusicLibraries = [rock,pop,sadnchill,mix]
+export let MusicLibraries = [rock,pop,imagineDragons,sadnchill,mix]
 
-var local = localStorage.getItem('mixLibrary')
+let local = localStorage.getItem('mixLibrary')
 
 if( local == null){
 for (let i = 0 ; i < MusicLibraries.length -1 ; i++){
@@ -443,7 +443,7 @@ else{
     }
 }
 
-document.cookie = "name = '7amada'; expires "
+
 function createRandomArray(range , repitions){
     if (repitions > range){
      throw console.error('Random range is not fit for the number of repitions given');

@@ -7,7 +7,7 @@ let trackseeker            = document.querySelector('.trackseeker')
 export let playerimg       = document.querySelector('.playerImg')
 let playlist               = document.querySelector('.playlist') 
 let playerTrackName        = document.querySelector('.playerTrackName')
-let volumepanel            = document.querySelector('.volume')
+export let volumepanel     = document.querySelector('.volume')
 let volumeseeker           = document.querySelector('.volumeSeeker')
 export let currentTime     = document.querySelector('.currentTime')
 export let totalDuration   = document.querySelector('.totalDuration')
@@ -35,9 +35,9 @@ let isplaying              = false
 let volumeshown            = false
 let currentLibrary 
 let updateTimer
+let volumePanelTimer
+var oldIndex = null
 
-
-console.log(buttongroup)
 
 function createSong(songName,artistName,artPath,index){
     var song = document.createElement('div');
@@ -53,14 +53,15 @@ function createSong(songName,artistName,artPath,index){
     var trackDetails = document.createElement('div');
     trackDetails.classList.add('trackDetails');
 
-    var trackArtist = document.createElement('h2')
+    var trackArtist = document.createElement('h3')
     trackArtist.textContent = artistName;
 
-    var trackname = document.createElement('h3');
+    var trackname = document.createElement('h2');
     trackname.textContent = songName;
 
-    trackDetails.appendChild(trackArtist);
     trackDetails.appendChild(trackname);
+    trackDetails.appendChild(trackArtist);
+    
 
     var buttons = document.createElement('div');
     buttons.classList.add('buttons');
@@ -101,7 +102,7 @@ function createSong(songName,artistName,artPath,index){
 
 
 
-function loadTrack(libraryNumber = 3){
+function loadTrack(libraryNumber = 4){
     clearInterval(updateTimer);
     resetValues();
 
@@ -123,7 +124,7 @@ function resetValues() {
 function next(){
     
     if (!shuffling){
-    currentIndex < MusicLibraries[4].length-1 ?
+    currentIndex < MusicLibraries[currentLibrary].length ?
     (currentIndex ++ , playat(currentIndex+1)) : (currentIndex = 0 , playat(currentIndex+1))
     }
     else shuffle()
@@ -142,20 +143,42 @@ function prev(){
 
 function play(){
     isplaying?
-    (currentTrack.pause() , isplaying = false , playerimg.style.animationPlayState = 'paused',playbuttonimg.classList.replace('fa-pause','fa-play')
+    (
+        currentTrack.pause() ,
+        isplaying = false ,
+        playbuttonimg.classList.replace('fa-pause','fa-play'),
+        playListPlayButton.classList.replace('fa-pause','fa-play')
     ):
-    (currentTrack.play(), isplaying = true , playerimg.style.animationPlayState = 'running',playbuttonimg.classList.replace('fa-play','fa-pause'))
+    
+    (
+        currentTrack.play(),
+        isplaying = true ,
+        playbuttonimg.classList.replace('fa-play','fa-pause'),
+        playListPlayButton.classList.replace('fa-play','fa-pause')
+    )
 }
 
 
 function showvolumepanel(){
+    
     console.log('clicked')
-    volumeshown?
-    (volumepanel.style.visibility = 'hidden',volumepanel.style.opacity = 0, volumeshown = false, volumeButton.style.backgroundColor = '#cccccc') :
-    (volumepanel.style.visibility = 'visible', volumepanel.style.opacity = 1,volumeshown = true,volumeButton.style.backgroundColor = 'rgb(149 163 222)')
+    
+    if(volumeshown){
+        volumepanel.style.visibility = 'hidden'
+        clearInterval(volumePanelTimer)
+        volumepanel.style.opacity = 0
+        volumeshown = false
+        volumeButton.style.backgroundColor = '#cccccc'
+     }
+    else{
+        volumePanelTimer = setInterval(()=>showvolumepanel(),3000)
+        volumepanel.style.visibility = 'visible'
+        volumepanel.style.opacity = 1
+        volumeshown = true
+        volumeButton.style.backgroundColor = 'rgb(149 163 222)'
+    }
+
 }
-
-
 function setvolume(){
     currentTrack.volume = volumeseeker.value / 100
 }
@@ -182,20 +205,27 @@ function setUpdate(){
 
 
 function playat(index){
-    playListPlayButton.classList.replace('fa-pause','fa-play')
+    
+    if(index !== oldIndex){
     nowplaying.classList.remove('nowplaying');
     nowplaying = document.querySelector(`.song:nth-of-type(${index})`)
     nowplaying.classList.add('nowplaying');
     playListPlayButton = document.querySelector(`.song:nth-of-type(${index}) button:nth-of-type(2) i`)
+    oldIndex = index
     playListPlayButton.classList.replace('fa-play','fa-pause')
-    
-    
     currentIndex = index-1;
     loadTrack(currentLibrary);
     isplaying = true
     playbuttonimg.classList.replace('fa-play','fa-pause')
-    playerimg.style.animationPlayState = 'running'
     currentTrack.play();
+    }
+    else{
+        playListPlayButton.classList.replace('fa-pause','fa-play') 
+        playbuttonimg.classList.replace('fa-pause','fa-play') 
+        isplaying = false
+        currentTrack.pause();
+    }
+
 }
 
 function shuffle(){
@@ -234,7 +264,7 @@ function loadLibrary(libraryNumber){
         createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
         
     }
-    loadTrack(libraryNumber)
+    // loadTrack(libraryNumber)
 }
 
 function expand(){
@@ -256,23 +286,18 @@ nxt.addEventListener('click',() =>nextPrev('right'));
 prv.addEventListener('click',() =>nextPrev('left'));
 volumeButton.addEventListener('click',() =>showvolumepanel());
 volumeseeker.addEventListener('input',() => setvolume());
-volumeseeker.addEventListener('mouseout',()=>{setTimeout(()=>{volumepanel.style.visibility = 'hidden'
-                                            volumepanel.style.opacity = 0
-                                            volumeshown = false
-                                            volumeButton.style.backgroundColor = '#cccccc'},3000)
-                                        })
 rocklibrary.addEventListener('click',()=>loadLibrary(0));
 poplibrary.addEventListener('click',()=>loadLibrary(1));
-// imaginelibrary.addEventListener('click',()=>loadLibrary(2));
-mixlibrary.addEventListener('click',()=>loadLibrary(3));
-sadnchill.addEventListener('click',()=>loadLibrary(2));
+imaginelibrary.addEventListener('click',()=>loadLibrary(2));
+mixlibrary.addEventListener('click',()=>loadLibrary(4));
+sadnchill.addEventListener('click',()=>loadLibrary(3));
 expandbutton.addEventListener('click',()=>expand())
     
 
 
 // initialising the defaukt playlist and setting the volume to 20 % and loading the tracks from the playlists
-for ( var i = 0 ; i < MusicLibraries[3].length ; i ++) {
-    var songDetails = MusicLibraries[3][i]
+for ( var i = 0 ; i < MusicLibraries[4].length ; i ++) {
+    var songDetails = MusicLibraries[4][i]
     console.log(songDetails)
     createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
     

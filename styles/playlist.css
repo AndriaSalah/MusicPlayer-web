@@ -15,7 +15,7 @@
     display: flex;
     /* justify-content: space-evenly; */
     align-items: center;
-    height: 8vh;
+    height: 6vh;
     /* padding: 3rem 1.5rem; */
     border-radius: 10px;
     padding: 1.2rem 0rem 1.2rem 0.2rem;
@@ -91,6 +91,7 @@
     top: 0;
     bottom: 0;
 }
+
 
 .playlist::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.76);
