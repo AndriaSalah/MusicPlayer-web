@@ -1,3 +1,4 @@
+import Cookies from "js-cookie"
 
 let rock = [
     
@@ -424,7 +425,7 @@ const sadnchill = [
 ]
 export let MusicLibraries = [rock,pop,imagineDragons,sadnchill,mix]
 
-let local = localStorage.getItem('mixLibrary')
+let local = Cookies.get('mixLibrary')
 
 if( local == null){
 for (let i = 0 ; i < MusicLibraries.length -1 ; i++){
@@ -435,7 +436,7 @@ for (let i = 0 ; i < MusicLibraries.length -1 ; i++){
             mix.push(temp[randomIndexs[y]])
         }
     }  
-    localStorage.setItem('mixLibrary',JSON.stringify(mix))
+    Cookies.set('mixLibrary',JSON.stringify(mix) ,{expires : 1})
 }
 else{
     for (let i = 0 ; i < JSON.parse(local).length ; i++){
