@@ -71,7 +71,10 @@ export function expandTime(expanded,mobile){
     if(mobile){
     if(!expanded){
         currentTime.style.display='block'
+        currentTime.style.marginRight='0.2rem'
         totalDuration.style.display='block'
+        totalDuration.style.marginRight='1rem'
+        totalDuration.style.marginLeft='0.5rem'
     }
     else{
         currentTime.style.display='none'
