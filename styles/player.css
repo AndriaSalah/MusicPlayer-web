@@ -40,7 +40,7 @@
    
 }
 .player .buttongroup{
-    display: flex;
+    display: flex !important;
 }
 .player button{
     display: flex;
@@ -148,7 +148,7 @@
     width: auto;
 }
 .player .buttongroup{
-    display: none;
+    display: none !important;
 }
 .player .currentTime,.player .totalDuration{
     display: none;

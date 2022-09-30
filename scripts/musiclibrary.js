@@ -40,7 +40,8 @@ let volumePanelTimer
 let oldIndex = 1
 let Queue = []
 let QueueSong 
-
+let nowplaying
+let playListPlayButton
 
 function createSong(songName,artistName,artPath,index){
     var song = document.createElement('div');
@@ -138,9 +139,9 @@ function resetValues() {
     trackseeker.value = 0;
   }
 function next(){
-    
-    if (!shuffling){
-        if(Queue.length == 0 ){
+    debugger
+    if(Queue.length == 0 ){
+        if (!shuffling){
             if(currentIndex < MusicLibraries[currentLibrary].length) {
                 currentIndex ++ , playat(currentIndex+1)
             }
@@ -149,22 +150,28 @@ function next(){
                 playat(currentIndex+1)
             }
         }
-        else{
-            loadTrack(null)
-            currentTrack.play();
-        }
+        else shuffle()
     }
-    else shuffle()
+    else{
+        loadTrack(null)
+        currentTrack.play();
+    }
+    
 
 }
 
 function prev(){
-    
-    if (!shuffling){
-    currentIndex > 0  ?
-    (currentIndex -- , playat(currentIndex+1)) : (currentIndex = 0 , playat(currentIndex+1))
+    if(Queue.length == 0 ){
+        if (!shuffling){
+        currentIndex > 0  ?
+        (currentIndex -- , playat(currentIndex+1)) : (currentIndex = 0 , playat(currentIndex+1))
+        }
+    else  shuffle()
     }
-    else shuffle()
+    else{
+        loadTrack(null)
+        currentTrack.play();
+    }
 
 }
 
@@ -267,6 +274,7 @@ function shuffle(){
         }
 
     }
+
 function enableshuffle(){
     shuffling? (shuffling=false , shuffleButton.style.backgroundColor = '#cccccc'):
     (shuffling = true , shuffleButton.style.backgroundColor = 'rgb(149 163 222)')
@@ -321,21 +329,52 @@ mixlibrary.addEventListener('click',()=>loadLibrary(4));
 sadnchill.addEventListener('click',()=>loadLibrary(3));
 expandbutton.addEventListener('click',()=>expand())
 currentTrack.addEventListener('ended',next);
-    
+window.addEventListener('unload',()=>{
+    let tracktime = currentTrack.currentTime
+    let previousSession = {
+        currentIndex,
+        currentLibrary,
+        tracktime,
+        Queue,
+        
+    }
+    localStorage.setItem('previousSession',JSON.stringify(previousSession))
+})    
 
 
 // initialising the defaukt playlist and setting the volume to 20 % and loading the tracks from the playlists
+currentTrack.volume = volumeseeker.value / 100
+let previousSession = JSON.parse(localStorage.getItem('previousSession'))
+if(previousSession == null){
 for ( var i = 0 ; i < MusicLibraries[4].length ; i ++) {
     var songDetails = MusicLibraries[4][i]
     createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
     
 }
-currentTrack.volume = volumeseeker.value / 100
 
-let nowplaying = document.querySelector('.song:nth-of-type(1)')
+
+nowplaying = document.querySelector('.song:nth-of-type(1)')
 nowplaying.classList.add('nowplaying')
-let playListPlayButton = document.querySelector(`.song:nth-of-type(1) button:nth-of-type(2) i`)
+playListPlayButton = document.querySelector(`.song:nth-of-type(1) button:nth-of-type(2) i`)
 loadTrack()
 
+}
 
+else{
+    currentIndex = previousSession.currentIndex
+    currentLibrary = previousSession.currentLibrary
+    Queue = previousSession.Queue
+    for ( var i = 0 ; i < MusicLibraries[currentLibrary].length ; i ++) {
+        var songDetails = MusicLibraries[currentLibrary][i]
+        createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
+        
+    }
+    
+    
+    nowplaying = document.querySelector(`.song:nth-of-type(${currentIndex+1})`)
+    nowplaying.classList.add('nowplaying')
+    playListPlayButton = document.querySelector(`.song:nth-of-type(${currentIndex+1}) button:nth-of-type(2) i`)
+    loadTrack(currentLibrary)
+    currentTrack.currentTime = previousSession.tracktime
+}
 //----------------------------------------------------------------------------------------------------
