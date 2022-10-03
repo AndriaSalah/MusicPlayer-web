@@ -47,7 +47,9 @@
     font-size: 20px;
     transition-duration: 0.1s ;
     background-color: #cccccc;
-    
+    /* iphone fix */
+    align-items: center;
+    justify-content: center;
 }
 .song .buttons .addbutton{
     background-color: transparent;
