@@ -396,13 +396,13 @@ const sadnchill = [
     },
     {
         imgPath   : '',
-        musicPath : 'https://drive.google.com/uc?id=1RkwZy_8BAOkJwsAqDmmjDXL8vCZPI5ub',
+        musicPath : 'https://drive.google.com/uc?id=1o2DxV19BfinyRtIjWhExIF0133j-ASUI',
         artistName: 'Seafret',
         trackName : `Give Me Something`
     },
     {
         imgPath   : '',
-        musicPath : 'https://drive.google.com/uc?id=1o2DxV19BfinyRtIjWhExIF0133j-ASUI',
+        musicPath : 'https://drive.google.com/uc?id=1RkwZy_8BAOkJwsAqDmmjDXL8vCZPI5ub',
         artistName: 'Seafret',
         trackName : `Girl I Wish I Didn't Know`
     },
@@ -423,6 +423,7 @@ const sadnchill = [
 
 
 ]
+
 export let MusicLibraries = [rock,pop,imagineDragons,sadnchill,mix]
 
 let local = Cookies.get('mixLibrary')
