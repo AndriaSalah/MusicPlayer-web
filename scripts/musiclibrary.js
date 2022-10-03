@@ -14,7 +14,7 @@ export let currentTime     = document.querySelector('.currentTime')
 export let totalDuration   = document.querySelector('.totalDuration')
 let volumeButton           = document.querySelector('.volumeButton')
 let shuffleButton          = document.querySelector('.shuffleButton')
-let playbuttonimg          = document.querySelector('.playbutton i')
+let playerPlayButton       = document.querySelector('.playbutton i')
 let playbutton             = document.querySelector('.playbutton')
 let prv                    = document.querySelector('.prev') 
 let nxt                    = document.querySelector('.next') 
@@ -42,6 +42,7 @@ let Queue = []
 let QueueSong 
 let nowplaying
 let playListPlayButton
+let nowPlayingSong = {index : 0 ,library : 4}
 
 function createSong(songName,artistName,artPath,index){
     var song = document.createElement('div');
@@ -78,17 +79,17 @@ function createSong(songName,artistName,artPath,index){
     addbuttonImg.classList.add("fa-plus")
     addButton.appendChild(addbuttonImg)
     addButton.addEventListener('click',() => addToQueue(index));
-    var playButtonimg = document.createElement('button');;
-    var playButtonimgImg = document.createElement('i');
-    playButtonimgImg.classList.add("fa-solid")
-    playButtonimgImg.classList.add("fa-play")
-    playButtonimg.appendChild(playButtonimgImg);
-    playButtonimg.addEventListener('click',() => playat(index+1));
+    var PLplayButton = document.createElement('button');;
+    var PLplayButtonImg = document.createElement('i');
+    PLplayButtonImg.classList.add("fa-solid")
+    PLplayButtonImg.classList.add("fa-play")
+    PLplayButton.appendChild(PLplayButtonImg);
+    PLplayButton.addEventListener('click',() => playat(index+1));
     
 
 
     buttons.appendChild(addButton);
-    buttons.appendChild(playButtonimg);
+    buttons.appendChild(PLplayButton);
     
     var linebreak = document.createElement('hr');
 
@@ -103,24 +104,22 @@ function createSong(songName,artistName,artPath,index){
 
 }    
 
-
-
-
 function loadTrack(libraryNumber = 4){
     clearInterval(updateTimer);
     resetValues();
     if(Queue.length == 0){
-    playerTrackName.textContent = MusicLibraries[libraryNumber][currentIndex].trackName;
-
-    currentTrack.src = MusicLibraries[libraryNumber][currentIndex].musicPath;
-    if(MusicLibraries[libraryNumber][currentIndex].imgPath != ''){
-        playerimg.src = MusicLibraries[libraryNumber][currentIndex].imgPath;
-    }
+        playerTrackName.textContent = MusicLibraries[libraryNumber][currentIndex].trackName;
+        currentTrack.src = MusicLibraries[libraryNumber][currentIndex].musicPath;
+        if(MusicLibraries[libraryNumber][currentIndex].imgPath != ''){
+            playerimg.src = MusicLibraries[libraryNumber][currentIndex].imgPath;
+        }
         else playerimg.src="Music/Artwork/default.png"
     }
     else{          
         console.log(Queue)
-        QueueSong = Queue.shift();
+        if(QueueSong == null ){
+            QueueSong = Queue.shift();
+        }
         playerTrackName.textContent = QueueSong.trackName;
         currentTrack.src = QueueSong.musicPath;
         if(QueueSong.imgPath != ''){
@@ -129,6 +128,7 @@ function loadTrack(libraryNumber = 4){
             else playerimg.src="Music/Artwork/default.png"
             console.log(Queue)
             console.log(QueueSong)
+           
     }
     currentTrack.load();
     updateTimer = setInterval(setUpdate, 1000);
@@ -139,10 +139,10 @@ function resetValues() {
     trackseeker.value = 0;
   }
 function next(){
-    debugger
+    
     if(Queue.length == 0 ){
         if (!shuffling){
-            if(currentIndex < MusicLibraries[currentLibrary].length) {
+            if(currentIndex < MusicLibraries[currentLibrary].length -1) {
                 currentIndex ++ , playat(currentIndex+1)
             }
             else {
@@ -180,14 +180,14 @@ function play(){
     (
         currentTrack.pause() ,
         isplaying = false ,
-        playbuttonimg.classList.replace('fa-pause','fa-play'),
+        playerPlayButton.classList.replace('fa-pause','fa-play'),
         playListPlayButton.classList.replace('fa-pause','fa-play')
     ):
     
     (
         currentTrack.play(),
         isplaying = true ,
-        playbuttonimg.classList.replace('fa-play','fa-pause'),
+        playerPlayButton.classList.replace('fa-play','fa-pause'),
         playListPlayButton.classList.replace('fa-play','fa-pause')
     )
 }
@@ -236,23 +236,37 @@ function setUpdate(){
 
 
 function playat(index){
+    
     if(index !== oldIndex){
-    nowplaying.classList.remove('nowplaying');
-    nowplaying = document.querySelector(`.song:nth-of-type(${index})`)
-    nowplaying.classList.add('nowplaying');
-    playListPlayButton.classList.replace('fa-pause','fa-play')
-    playListPlayButton = document.querySelector(`.song:nth-of-type(${index}) button:nth-of-type(2) i`)
-    oldIndex = index
-    playListPlayButton.classList.replace('fa-play','fa-pause')
-    currentIndex = index-1;
-    loadTrack(currentLibrary);
-    isplaying = true
-    playbuttonimg.classList.replace('fa-play','fa-pause')
-    currentTrack.play();
+        Queue.length = 0 
+        NowPlaying(index,'remove')
+        NowPlaying(index,'add')
+        oldIndex = index
+        currentIndex = index-1;
+        nowPlayingSong.index = currentIndex
+        nowPlayingSong.library = currentLibrary
+        loadTrack(currentLibrary);
+        isplaying = true
+        playerPlayButton.classList.replace('fa-play','fa-pause')
+        currentTrack.play();
     }
 
     else play();
 }
+
+function NowPlaying(index,operation){
+    if(operation === 'remove'){
+        nowplaying.classList.remove('nowplaying');
+        playListPlayButton.classList.replace('fa-pause','fa-play')
+    }
+    else {
+        nowplaying = document.querySelector(`.song:nth-of-type(${index})`)
+        nowplaying.classList.add('nowplaying');
+        playListPlayButton = document.querySelector(`.song:nth-of-type(${index}) button:nth-of-type(2) i`)
+        playListPlayButton.classList.replace('fa-play','fa-pause')
+    }        
+}
+
 function addToQueue(index){
 Queue.push(MusicLibraries[currentLibrary][index]) 
     jSuites.notification({
@@ -285,21 +299,26 @@ function seekTo(){
     currentTrack.currentTime = seektoo;
 }
 function nextPrev(direction){
-
+    QueueSong = null
     direction == 'right' ? next() : prev()
 }
 
 function loadLibrary(libraryNumber){
+    
     playlist.innerHTML=''
-    currentIndex = 0
     currentLibrary = libraryNumber;
     for ( var i = 0 ; i < MusicLibraries[libraryNumber].length ; i ++) {
         var songDetails = MusicLibraries[libraryNumber][i]
         createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
         
     }
+    if(nowPlayingSong.library === currentLibrary){
+        NowPlaying(nowPlayingSong.index+1 , 'add')
+    }
+    
     
 }
+
 
 function expand(){
     let mobile = window.matchMedia("(max-width: 690px)").matches
@@ -332,16 +351,23 @@ currentTrack.addEventListener('ended',next);
 window.addEventListener('unload',()=>{
     let tracktime = currentTrack.currentTime
     let previousSession = {
-        currentIndex,
-        currentLibrary,
+        nowPlayingSong,
+        oldIndex,
         tracktime,
         Queue,
-        
+        QueueSong
     }
     localStorage.setItem('previousSession',JSON.stringify(previousSession))
 })    
 
 
+function initPrevSess(){
+    currentIndex = previousSession.nowPlayingSong.index
+    nowPlayingSong.index = previousSession.nowPlayingSong.index
+    currentLibrary = previousSession.nowPlayingSong.library 
+    nowPlayingSong.library = previousSession.nowPlayingSong.library 
+    oldIndex = previousSession.oldIndex
+}
 // initialising the defaukt playlist and setting the volume to 20 % and loading the tracks from the playlists
 currentTrack.volume = volumeseeker.value / 100
 let previousSession = JSON.parse(localStorage.getItem('previousSession'))
@@ -361,20 +387,26 @@ loadTrack()
 }
 
 else{
-    currentIndex = previousSession.currentIndex
-    currentLibrary = previousSession.currentLibrary
-    Queue = previousSession.Queue
+    initPrevSess()    
     for ( var i = 0 ; i < MusicLibraries[currentLibrary].length ; i ++) {
         var songDetails = MusicLibraries[currentLibrary][i]
         createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
         
     }
     
-    
+    QueueSong = previousSession.QueueSong
     nowplaying = document.querySelector(`.song:nth-of-type(${currentIndex+1})`)
     nowplaying.classList.add('nowplaying')
     playListPlayButton = document.querySelector(`.song:nth-of-type(${currentIndex+1}) button:nth-of-type(2) i`)
-    loadTrack(currentLibrary)
     currentTrack.currentTime = previousSession.tracktime
-}
+    if(QueueSong == null){
+        loadTrack(currentLibrary)
+        Queue = previousSession.Queue
+    }
+    else{
+        Queue = previousSession.Queue
+        loadTrack(null)
+    }
+    currentTrack.currentTime = previousSession.tracktime
+}    
 //----------------------------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /* play list css and songs */
 .playlist{
-    margin: 1rem 2rem 2rem 2rem !important;
+    margin: 1rem 5rem 2rem 5rem !important;
     display: flex;
     flex-direction: column;
     background-color: #cccccc00;
