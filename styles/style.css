@@ -5,7 +5,6 @@ html{
 body{
     margin: 0;
     overflow-x: hidden;
-    /* overflow-y: hidden; */
     width: 100%;
     height: 100%;
     background-color: #24293E ;
@@ -168,11 +167,12 @@ a {
   }
 
   @media only screen and (max-width :690px){
-    
-.imgSlider img{
-    width: 20vh;
-  }
-  
+
+.albums {
+   
+    min-width: 13rem;
+}
+
 .imgSlider{
     width: 94%;
 }

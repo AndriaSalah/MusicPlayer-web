@@ -1,10 +1,10 @@
 /* play list css and songs */
 .playlist{
-    margin: 1rem 5rem 2rem 5rem !important;
+    margin: 0rem 6rem 2rem 3.5rem !important;
     display: flex;
     flex-direction: column;
     background-color: #cccccc00;
-    max-height: 32.5rem;
+    max-height: 33.5rem;
     overflow-y: auto;
     border-radius: 10px ;
     color: white;
@@ -58,7 +58,7 @@
    
 }
 .song .buttons button:hover{
-    background-color: #9eccc493;
+    background-color: #458cf78f;
 }
 .song button img{
     width: 1.5vw;
@@ -110,8 +110,8 @@
 
 @media only screen and (max-width :690px){
     .playlist{
-        max-height: 32rem ;
-        margin: 2rem 0.5rem 2rem 0.5rem !important;
+        max-height: 33rem ;
+        margin: 0rem 0.5rem 2rem 0.5rem !important;
        }
    .song img{
            width: 5vh ;

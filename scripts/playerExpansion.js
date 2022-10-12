@@ -1,4 +1,13 @@
-import  {player, body, buttongroup, volumepanel, playerimg, currentTime, totalDuration , expandedplayer, expandbutton}  from "./musiclibrary.js";
+import  {  playerimg, currentTime, totalDuration }  from "./musiclibrary.js";
+import  { volumepanel } from "./Volume.js";
+
+ let expandbutton    = document.querySelector('.expand')
+ let player          = document.querySelector('.player')
+ let expandedplayer  = document.querySelector('.expandedplayer')
+ let body            = document.querySelector('body')
+ let buttongroup     = document.querySelector('.buttongroup') 
+ let expanded        = false
+
 
 export function expandPlayer(expanded,mobile){
     
@@ -68,3 +77,16 @@ export function expandTime(expanded,mobile){
     }
 }
 }
+
+
+function expand(){
+    let mobile = window.matchMedia("(max-width: 690px)").matches
+    expandPlayer(expanded,mobile)
+    expandPlayerimg(expanded,mobile)
+    expandButtons(expanded,mobile)
+    expandTime(expanded,mobile)
+    expanded ? expanded = false : expanded = true 
+}
+
+
+expandbutton.addEventListener('click',()=>expand())

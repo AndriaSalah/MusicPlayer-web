@@ -1,18 +1,16 @@
 import { MusicLibraries } from "/scripts/albums.js"
 import { expandButtons, expandPlayer, expandPlayerimg, expandTime } from "./playerExpansion.js"
+import { volumeseeker } from "./Volume.js"
 
 
 
-let currentTrack           = document.createElement('audio')
+export let currentTrack           = document.createElement('audio')
 let trackseeker            = document.querySelector('.trackseeker')
 export let playerimg       = document.querySelector('.playerImg')
 let playlist               = document.querySelector('.playlist') 
 let playerTrackName        = document.querySelector('.playerTrackName')
-export let volumepanel     = document.querySelector('.volume')
-let volumeseeker           = document.querySelector('.volumeSeeker')
 export let currentTime     = document.querySelector('.currentTime')
 export let totalDuration   = document.querySelector('.totalDuration')
-let volumeButton           = document.querySelector('.volumeButton')
 let shuffleButton          = document.querySelector('.shuffleButton')
 let playerPlayButton       = document.querySelector('.playbutton i')
 let playbutton             = document.querySelector('.playbutton')
@@ -23,20 +21,16 @@ let poplibrary             = document.querySelector('.two')
 let imaginelibrary         = document.querySelector('.four')
 let mixlibrary             = document.querySelector('.three')
 let sadnchill              = document.querySelector('.five')
-export let expandbutton    = document.querySelector('.expand')
-export let player          = document.querySelector('.player')
-export let expandedplayer  = document.querySelector('.expandedplayer')
-export let body            = document.querySelector('body')
-export let buttongroup     = document.querySelector('.buttongroup') 
-export let expanded        = false
+
 let shuffling              = false
 let rand_check             = false
 let currentIndex           = 0
 let isplaying              = false
-let volumeshown            = false
+
 let currentLibrary         = 4
+let nowplayinglibrary      = 4
 let updateTimer
-let volumePanelTimer
+
 let oldIndex = 1
 let Queue = []
 let QueueSong 
@@ -133,6 +127,27 @@ function loadTrack(libraryNumber = 4){
     currentTrack.load();
     updateTimer = setInterval(setUpdate, 1000);
 }
+
+function setUpdate(){
+    let seekPosition = 0;
+    if(!isNaN(currentTrack.duration)){
+        seekPosition = currentTrack.currentTime * (100 / currentTrack.duration);
+        trackseeker.value = seekPosition;
+        let currentMinutes = Math.floor(currentTrack.currentTime / 60);
+        let currentSeconds = Math.floor(currentTrack.currentTime - currentMinutes * 60);
+        let durationMinutes = Math.floor(currentTrack.duration / 60);
+        let durationSeconds = Math.floor(currentTrack.duration - durationMinutes * 60);
+
+        if(currentSeconds < 10) {currentSeconds = "0" + currentSeconds; }
+        if(durationSeconds < 10) { durationSeconds = "0" + durationSeconds; }
+        if(currentMinutes < 10) {currentMinutes = "0" + currentMinutes; }
+        if(durationMinutes < 10) { durationMinutes = "0" + durationMinutes; }
+
+        currentTime.textContent = currentMinutes + ":" + currentSeconds;
+        totalDuration.textContent = durationMinutes + ":" + durationSeconds;
+    }
+}
+
 function resetValues() {
     currentTime.textContent = "00:00";
     totalDuration.textContent = "00:00";
@@ -143,18 +158,40 @@ function next(){
     if(Queue.length == 0 ){
         if (!shuffling){
             if(currentIndex < MusicLibraries[currentLibrary].length -1) {
-                currentIndex ++ , playat(currentIndex+1)
+                NowPlaying(currentIndex,'remove')
+                currentIndex ++ 
+                nowPlayingSong.index = currentIndex
+                if(currentLibrary === nowplayinglibrary){
+                    NowPlaying(currentIndex + 1,'add')
+                }
+                loadTrack(nowplayinglibrary)
+                if(isplaying){
+                    currentTrack.play()
+                }
+                else {play()}
+                oldIndex = currentIndex + 1
+
             }
             else {
+                NowPlaying(currentIndex,'remove')
                 currentIndex = 0 
-                playat(currentIndex+1)
+                nowPlayingSong.index = currentIndex
+                if(currentLibrary === nowplayinglibrary){
+                    NowPlaying(currentIndex + 1,'add')
+                }
+                loadTrack(nowplayinglibrary)
+                if(isplaying){
+                    currentTrack.play()
+                }
+                else {play()}
+                oldIndex = currentIndex + 1
             }
         }
         else shuffle()
     }
     else{
         loadTrack(null)
-        currentTrack.play();
+        play();
     }
     
 
@@ -163,8 +200,34 @@ function next(){
 function prev(){
     if(Queue.length == 0 ){
         if (!shuffling){
-        currentIndex > 0  ?
-        (currentIndex -- , playat(currentIndex+1)) : (currentIndex = 0 , playat(currentIndex+1))
+            if(currentIndex > 0 ){
+                NowPlaying(currentIndex,'remove')
+                currentIndex -- 
+                nowPlayingSong.index = currentIndex
+                if(currentLibrary === nowplayinglibrary){
+                    NowPlaying(currentIndex + 1,'add')
+                }
+                loadTrack(nowplayinglibrary)
+                if(isplaying){
+                    currentTrack.play()
+                }
+                else {play()}
+                oldIndex = currentIndex + 1
+            }
+            else{
+                NowPlaying(currentIndex,'remove')
+                currentIndex = 0  
+                if(currentLibrary === nowplayinglibrary){
+                    NowPlaying(currentIndex + 1,'add')
+                }
+                NowPlaying(currentIndex + 1,'add')
+                loadTrack(nowplayinglibrary)
+                if(isplaying){
+                    currentTrack.play()
+                }
+                else {play()}
+                oldIndex = currentIndex + 1
+            }
         }
     else  shuffle()
     }
@@ -193,65 +256,32 @@ function play(){
 }
 
 
-function showvolumepanel(){
-    if(volumeshown){
-        volumepanel.style.visibility = 'hidden'
-        clearInterval(volumePanelTimer)
-        volumepanel.style.opacity = 0
-        volumeshown = false
-        volumeButton.style.backgroundColor = '#cccccc'
-     }
-    else{
-        volumePanelTimer = setInterval(()=>showvolumepanel(),3000)
-        volumepanel.style.visibility = 'visible'
-        volumepanel.style.opacity = 1
-        volumeshown = true
-        volumeButton.style.backgroundColor = 'rgb(149 163 222)'
-    }
-
-}
-function setvolume(){
-    currentTrack.volume = volumeseeker.value / 100
-}
-
-function setUpdate(){
-    let seekPosition = 0;
-    if(!isNaN(currentTrack.duration)){
-        seekPosition = currentTrack.currentTime * (100 / currentTrack.duration);
-        trackseeker.value = seekPosition;
-        let currentMinutes = Math.floor(currentTrack.currentTime / 60);
-        let currentSeconds = Math.floor(currentTrack.currentTime - currentMinutes * 60);
-        let durationMinutes = Math.floor(currentTrack.duration / 60);
-        let durationSeconds = Math.floor(currentTrack.duration - durationMinutes * 60);
-
-        if(currentSeconds < 10) {currentSeconds = "0" + currentSeconds; }
-        if(durationSeconds < 10) { durationSeconds = "0" + durationSeconds; }
-        if(currentMinutes < 10) {currentMinutes = "0" + currentMinutes; }
-        if(durationMinutes < 10) { durationMinutes = "0" + durationMinutes; }
-
-        currentTime.textContent = currentMinutes + ":" + currentSeconds;
-        totalDuration.textContent = durationMinutes + ":" + durationSeconds;
-    }
-}
-
 
 function playat(index){
     
-    if(index !== oldIndex){
+    if(index !== oldIndex || currentLibrary !== nowplayinglibrary){
         Queue.length = 0 
         NowPlaying(index,'remove')
         NowPlaying(index,'add')
         oldIndex = index
         currentIndex = index-1;
         nowPlayingSong.index = currentIndex
-        nowPlayingSong.library = currentLibrary
-        loadTrack(currentLibrary);
+        if (currentLibrary !== nowplayinglibrary ){
+            nowplayinglibrary = currentLibrary 
+        }
+        nowPlayingSong.library = nowplayinglibrary
+        loadTrack(nowplayinglibrary);
         isplaying = true
         playerPlayButton.classList.replace('fa-play','fa-pause')
         currentTrack.play();
     }
 
-    else play();
+    else{
+
+        play();
+
+    }
+    
 }
 
 function NowPlaying(index,operation){
@@ -264,7 +294,9 @@ function NowPlaying(index,operation){
         nowplaying.classList.add('nowplaying');
         playListPlayButton = document.querySelector(`.song:nth-of-type(${index}) button:nth-of-type(2) i`)
         playListPlayButton.classList.replace('fa-play','fa-pause')
-    }        
+        
+    }
+    
 }
 
 function addToQueue(index){
@@ -279,19 +311,31 @@ Queue.push(MusicLibraries[currentLibrary][index])
 function shuffle(){
     rand_check = false
     while(!rand_check){
-    let random = Math.floor(Math.random()*(MusicLibraries[3].length -1))
+    let random = Math.floor(Math.random()*MusicLibraries[nowplayinglibrary].length)
+    console.log(random)
         if (currentIndex != random){
             rand_check = true
             currentIndex = random
-                playat(random+1)
+            NowPlaying(currentIndex,'remove') 
+            nowPlayingSong.index = currentIndex
+            if(currentLibrary === nowplayinglibrary){
+                NowPlaying(currentIndex + 1,'add')
+            }
+            loadTrack(nowplayinglibrary)
+            if(isplaying){
+                currentTrack.play()
+            }
+            else {play()}
+            oldIndex = currentIndex + 1
+
             }
         }
 
     }
 
 function enableshuffle(){
-    shuffling? (shuffling=false , shuffleButton.style.backgroundColor = '#cccccc'):
-    (shuffling = true , shuffleButton.style.backgroundColor = 'rgb(149 163 222)')
+    shuffling? (shuffling=false , shuffleButton.removeAttribute('style')):
+    (shuffling = true , shuffleButton.style.backgroundColor = '#6d90c5', shuffleButton.style.color = 'white' )
 }
 
 function seekTo(){
@@ -320,33 +364,18 @@ function loadLibrary(libraryNumber){
 }
 
 
-function expand(){
-    let mobile = window.matchMedia("(max-width: 690px)").matches
-
-    expandPlayer(expanded,mobile)
-    expandPlayerimg(expanded,mobile)
-    expandButtons(expanded,mobile)
-    expandTime(expanded,mobile)
-    expanded ? expanded = false : expanded = true 
-}
-
-
 currentTrack.preload = 'metadata'
 playbutton.addEventListener('click',() =>play());
 trackseeker.addEventListener('input',() =>seekTo());
 shuffleButton.addEventListener('click',() =>enableshuffle());
 nxt.addEventListener('click',() =>nextPrev('right'));
 prv.addEventListener('click',() =>nextPrev('left'));
-volumeButton.addEventListener('click',() =>showvolumepanel());
-volumepanel.addEventListener('mouseenter',()=>{clearInterval(volumePanelTimer)})
-volumepanel.addEventListener('mouseleave',()=>{volumePanelTimer = setInterval(()=>showvolumepanel(),3000)})
-volumeseeker.addEventListener('input',() => setvolume());
 rocklibrary.addEventListener('click',()=>loadLibrary(0));
 poplibrary.addEventListener('click',()=>loadLibrary(1));
 imaginelibrary.addEventListener('click',()=>loadLibrary(2));
 mixlibrary.addEventListener('click',()=>loadLibrary(4));
 sadnchill.addEventListener('click',()=>loadLibrary(3));
-expandbutton.addEventListener('click',()=>expand())
+
 currentTrack.addEventListener('ended',next);
 window.addEventListener('unload',()=>{
     let tracktime = currentTrack.currentTime
@@ -355,7 +384,10 @@ window.addEventListener('unload',()=>{
         oldIndex,
         tracktime,
         Queue,
-        QueueSong
+        QueueSong,
+        volume : currentTrack.volume,
+        shuffleState : shuffling,
+        nowplayinglibrary
     }
     localStorage.setItem('previousSession',JSON.stringify(previousSession))
 })    
@@ -367,6 +399,11 @@ function initPrevSess(){
     currentLibrary = previousSession.nowPlayingSong.library 
     nowPlayingSong.library = previousSession.nowPlayingSong.library 
     oldIndex = previousSession.oldIndex
+    volumeseeker.value = previousSession.volume * 100
+    currentTrack.volume = volumeseeker.value / 100
+    nowplayinglibrary = previousSession.nowplayinglibrary
+    if(previousSession.shuffleState == true) enableshuffle()
+
 }
 // initialising the defaukt playlist and setting the volume to 20 % and loading the tracks from the playlists
 currentTrack.volume = volumeseeker.value / 100
