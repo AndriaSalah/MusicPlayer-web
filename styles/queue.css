@@ -34,3 +34,11 @@ background-color: #6d90c5;
 .song #songartist{
     margin-right: 1rem;
 }
+
+
+@media only screen and (max-width :690px){
+    .queue{
+        bottom: 10rem;
+        width: 95%;
+    }
+}
