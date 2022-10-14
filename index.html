@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="/styles/playlist.css">
     <link rel="stylesheet" href="/styles/player.css">
+    <link rel="stylesheet" href="/styles/queue.css">
     <script src="https://jsuites.net/v4/jsuites.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
   </head>
@@ -60,32 +61,37 @@
        
       <!-- Player bar -->
       <div class="player">
-           <button class="expand"><i class="fa-solid fa-angle-up"></i></button>
-          <img class="playerImg" alt="">
-          <div class="expandedplayer">
-          <button class="playbutton" ><i class="fa-solid fa-play"></i></button>
-          <div class="currentTime">00:00</div>
-          <div class="track">
-              <h3 class="playerTrackName"></h3>
-              <input class="trackseeker" type="range" value= 0 step="0.01">
-          </div>
-          <div class="totalDuration">00:00</div>
-          </div>
-          <div class="buttongroup">
-          <button class="prev"><i class="fa-solid fa-angle-left"></i></button>
-          <button class="next"><i class="fa-solid fa-angle-right"></i></button>
-          <button class="shuffleButton" ><i class="fa-solid fa-shuffle"></i></button>
-          <button class="volumeButton" ><i class="fa-solid fa-volume-high"></i></button>
-          <div class="volume">
-              <h3>Volume</h3>
-              <input class="volumeSeeker"    type="range" value="12" min="0" max="100">
-          </div>
+            <button class="expand"><i class="fa-solid fa-angle-up"></i></button>
+            <img class="playerImg" alt="">
+            <div class="expandedplayer">
+                <button class="playbutton" ><i class="fa-solid fa-play"></i></button>
+                <div class="currentTime">00:00</div>
+                <div class="track">
+                    <h3 class="playerTrackName"></h3>
+                    <input class="trackseeker" type="range" value= 0 step="0.01">
+                </div>
+                <div class="totalDuration">00:00</div>
+            </div>
+            <div class="buttongroup">
+                <button class="prev"><i class="fa-solid fa-angle-left"></i></button>
+                <button class="next"><i class="fa-solid fa-angle-right"></i></button>
+                <button class="shuffleButton" ><i class="fa-solid fa-shuffle"></i></button>
+                <button class="volumeButton" ><i class="fa-solid fa-volume-high"></i></button>
+                <div class="volume">
+                    <h3>Volume</h3>
+                    <input class="volumeSeeker"    type="range" value="12" min="0" max="100">
+                </div>
+                <button class="queuebutton"><i class="fa-solid fa-bars"></i></button>
+                <div class="queue">
+                    <p>Queue is Empty</p>
+                   
+                </div>
+            </div>
       </div>
   </div>
 
       <!-- end of player bar -->
-  </div> 
-  <script type="module" src="/scripts/musiclibrary.js"></script>
-  <script type="module" src="/scripts/Volume.js"></script>
-  </body>
+    <script type="module" src="/scripts/musiclibrary.js"></script>
+    <script type="module" src="/scripts/Volume.js"></script>
+</body>
 </html>

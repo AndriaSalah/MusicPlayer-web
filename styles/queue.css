@@ -1,0 +1,36 @@
+.queue{
+    position: absolute;
+    bottom: 7rem;
+    right: .5rem;
+    width: 25rem;
+    max-height: 25rem;
+    background: rgba(24, 24, 24, 1) ;
+    border-radius: 10px;
+    overflow-y: scroll;
+    border-bottom: solid 10px #416baa;
+    color : white;
+    text-align: center;
+    font-size: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition-duration: 0.3s;
+}
+
+.queue .song{
+    background-color: #58576d;
+    justify-content: space-between;
+    margin: .5rem;
+    color: white;
+}
+.queue .song:hover{
+background-color: #6d90c5;
+}
+.queue .song img{
+    border-radius: 50px;
+}
+.song p{
+    font-size: 18px;
+}
+.song #songartist{
+    margin-right: 1rem;
+}

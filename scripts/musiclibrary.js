@@ -1,6 +1,7 @@
 import { MusicLibraries } from "/scripts/albums.js"
 import { expandButtons, expandPlayer, expandPlayerimg, expandTime } from "./playerExpansion.js"
 import { volumeseeker } from "./Volume.js"
+import { showQueue, updateQueueView, viewOnQueue } from "./queue.js"
 
 
 
@@ -21,18 +22,17 @@ let poplibrary             = document.querySelector('.two')
 let imaginelibrary         = document.querySelector('.four')
 let mixlibrary             = document.querySelector('.three')
 let sadnchill              = document.querySelector('.five')
-
+let queuebutton            = document.querySelector('.queuebutton')
 let shuffling              = false
 let rand_check             = false
 let currentIndex           = 0
 let isplaying              = false
-
 let currentLibrary         = 4
 let nowplayinglibrary      = 4
 let updateTimer
 
 let oldIndex = 1
-let Queue = []
+export let Queue = []
 let QueueSong 
 let nowplaying
 let playListPlayButton
@@ -99,6 +99,7 @@ function createSong(songName,artistName,artPath,index){
 }    
 
 function loadTrack(libraryNumber = 4){
+    
     clearInterval(updateTimer);
     resetValues();
     if(Queue.length == 0){
@@ -113,6 +114,7 @@ function loadTrack(libraryNumber = 4){
         console.log(Queue)
         if(QueueSong == null ){
             QueueSong = Queue.shift();
+            updateQueueView()
         }
         playerTrackName.textContent = QueueSong.trackName;
         currentTrack.src = QueueSong.musicPath;
@@ -126,6 +128,7 @@ function loadTrack(libraryNumber = 4){
     }
     currentTrack.load();
     updateTimer = setInterval(setUpdate, 1000);
+    
 }
 
 function setUpdate(){
@@ -173,6 +176,7 @@ function next(){
 
             }
             else {
+               
                 NowPlaying(currentIndex,'remove')
                 currentIndex = 0 
                 nowPlayingSong.index = currentIndex
@@ -190,6 +194,7 @@ function next(){
         else shuffle()
     }
     else{
+        
         loadTrack(null)
         play();
     }
@@ -305,7 +310,7 @@ Queue.push(MusicLibraries[currentLibrary][index])
         name: 'Queue',
         message: 'Added song Successfully',
     })
-
+    viewOnQueue(MusicLibraries[currentLibrary][index])
 }
 
 function shuffle(){
@@ -375,8 +380,8 @@ poplibrary.addEventListener('click',()=>loadLibrary(1));
 imaginelibrary.addEventListener('click',()=>loadLibrary(2));
 mixlibrary.addEventListener('click',()=>loadLibrary(4));
 sadnchill.addEventListener('click',()=>loadLibrary(3));
-
-currentTrack.addEventListener('ended',next);
+queuebutton.addEventListener('click', ()=> showQueue())
+currentTrack.addEventListener('ended',()=>next());
 window.addEventListener('unload',()=>{
     let tracktime = currentTrack.currentTime
     let previousSession = {
