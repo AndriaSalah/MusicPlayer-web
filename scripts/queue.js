@@ -1,9 +1,9 @@
+import { queuebutton } from "./musiclibrary.js"
 
-let htmlqueue = document.querySelector('.queue')
-let queueshown = false
-let queueemtpy = document.querySelector('.queue')
+export let htmlqueue = document.querySelector('.queue')
+export let queueshown = false
 let queueState = 'empty'
-let removeAllowed = false
+
 export function viewOnQueue(queue){
     if(queueState == 'empty'){
         htmlqueue.innerHTML = '<p>Next in Queue</p>'
@@ -28,14 +28,18 @@ export function viewOnQueue(queue){
     }
 
 export function showQueue(){
+    
     if(!queueshown){
+        queuebutton.style.transform = "rotate(90deg)"
         htmlqueue.style.visibility = 'visible'
         htmlqueue.style.opacity = 1
         queueshown = true
     }
     else{
+        queuebutton.style.transform = 'rotate(0deg)'
         queueshown =  false
-        htmlqueue.removeAttribute('style')
+        htmlqueue.style.visibility = 'hidden'
+        htmlqueue.style.opacity = 0
     }
 }
 

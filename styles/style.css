@@ -55,31 +55,31 @@ a {
 /* specifying a background image to each album */
 /* we can remove the classes and use nth-child pseudo class if we want to */
 /* but it will be more accurate for selection in js */
-.one{
+.rock{
     background-image: url(/Music/Artwork/rock.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.two{
+.pop{
     background-image: url(/Music/Artwork/pop.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
-.three{
+.dailyMix{
     background-image: url(/Music/Artwork/1.png);
     background-repeat: no-repeat;
     background-size: cover;
 }
-.three p{
+.dailyMix p{
     margin-bottom: 1.5rem;
 }
-.four{
+.imagineDragons{
     background-image: url(/Music/Artwork/imagine.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
-.five{
+.sadNchill{
     background-image: url(/Music/Artwork/slow.jpg);
     background-repeat: no-repeat;
     background-size: cover;

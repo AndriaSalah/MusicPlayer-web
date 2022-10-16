@@ -1,11 +1,10 @@
 import { MusicLibraries } from "/scripts/albums.js"
-import { expandButtons, expandPlayer, expandPlayerimg, expandTime } from "./playerExpansion.js"
 import { volumeseeker } from "./Volume.js"
 import { showQueue, updateQueueView, viewOnQueue } from "./queue.js"
 
 
 
-export let currentTrack           = document.createElement('audio')
+export let currentTrack    = document.createElement('audio')
 let trackseeker            = document.querySelector('.trackseeker')
 export let playerimg       = document.querySelector('.playerImg')
 let playlist               = document.querySelector('.playlist') 
@@ -17,12 +16,12 @@ let playerPlayButton       = document.querySelector('.playbutton i')
 let playbutton             = document.querySelector('.playbutton')
 let prv                    = document.querySelector('.prev') 
 let nxt                    = document.querySelector('.next') 
-let rocklibrary            = document.querySelector('.one')
-let poplibrary             = document.querySelector('.two')
-let imaginelibrary         = document.querySelector('.four')
-let mixlibrary             = document.querySelector('.three')
-let sadnchill              = document.querySelector('.five')
-let queuebutton            = document.querySelector('.queuebutton')
+let rocklibrary            = document.querySelector('.rock')
+let poplibrary             = document.querySelector('.pop')
+let mixlibrary             = document.querySelector('.dailyMix')
+let imaginelibrary         = document.querySelector('.imagineDragons')
+let sadnchill              = document.querySelector('.sadNchill')
+export let queuebutton            = document.querySelector('.queuebutton')
 let shuffling              = false
 let rand_check             = false
 let currentIndex           = 0
@@ -30,7 +29,8 @@ let isplaying              = false
 let currentLibrary         = 4
 let nowplayinglibrary      = 4
 let updateTimer
-
+let libraryspan
+let librarytitle
 let oldIndex = 1
 export let Queue = []
 let QueueSong 
@@ -102,6 +102,7 @@ function loadTrack(libraryNumber = 4){
     
     clearInterval(updateTimer);
     resetValues();
+    
     if(Queue.length == 0){
         playerTrackName.textContent = MusicLibraries[libraryNumber][currentIndex].trackName;
         currentTrack.src = MusicLibraries[libraryNumber][currentIndex].musicPath;
@@ -156,6 +157,47 @@ function resetValues() {
     totalDuration.textContent = "00:00";
     trackseeker.value = 0;
   }
+
+function highlightLibrary(){
+   
+    switch(nowplayinglibrary){
+        case 0 :    
+        if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')
+        librarytitle = document.querySelector('.rock #libraryTitle')
+        librarytitle.style.color = '#6d90c5'
+        libraryspan  = document.querySelector('.rock span')
+        libraryspan.style.opacity = 1
+        break
+        case 1 :  
+        if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')
+        librarytitle = document.querySelector('.pop #libraryTitle')
+        librarytitle.style.color = '#6d90c5' 
+        libraryspan  = document.querySelector('.pop span')
+        libraryspan.style.opacity = 1
+        break     
+        case 2 :   
+        if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style') 
+        librarytitle = document.querySelector('.imagineDragons #libraryTitle')
+        librarytitle.style.color = '#6d90c5'
+        libraryspan  = document.querySelector('.imagineDragons span')
+        libraryspan.style.opacity = 1
+        break
+        case 3 : 
+        if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')   
+        librarytitle = document.querySelector('.sadNchill #libraryTitle')
+        librarytitle.style.color = '#6d90c5'
+        libraryspan  = document.querySelector('.sadNchill span')
+        libraryspan.style.opacity = 1
+        break    
+        case 4 :
+        if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')
+        librarytitle = document.querySelector('.dailyMix #libraryTitle')
+        librarytitle.style.color = '#6d90c5' 
+        libraryspan  = document.querySelector('.dailyMix span')
+        libraryspan.style.opacity = 1
+        break     
+    }
+}
 function next(){
     
     if(Queue.length == 0 ){
@@ -279,6 +321,7 @@ function playat(index){
         isplaying = true
         playerPlayButton.classList.replace('fa-play','fa-pause')
         currentTrack.play();
+        highlightLibrary()
     }
 
     else{
@@ -410,14 +453,14 @@ function initPrevSess(){
     if(previousSession.shuffleState == true) enableshuffle()
 
 }
-// initialising the defaukt playlist and setting the volume to 20 % and loading the tracks from the playlists
+// initialising the default playlist and setting the volume to 20 % and loading the tracks from the playlists
 currentTrack.volume = volumeseeker.value / 100
 let previousSession = JSON.parse(localStorage.getItem('previousSession'))
 if(previousSession == null){
 for ( var i = 0 ; i < MusicLibraries[4].length ; i ++) {
     var songDetails = MusicLibraries[4][i]
     createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
-    
+    highlightLibrary()
 }
 
 
@@ -447,8 +490,12 @@ else{
     }
     else{
         Queue = previousSession.Queue
+        for (let song in Queue) {
+            viewOnQueue(Queue[song])
+        }
         loadTrack(null)
     }
     currentTrack.currentTime = previousSession.tracktime
+    highlightLibrary()
 }    
 //----------------------------------------------------------------------------------------------------

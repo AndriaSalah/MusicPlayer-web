@@ -2,7 +2,7 @@
     position: absolute;
     bottom: 7rem;
     right: .5rem;
-    width: 25rem;
+    width: 25%;
     max-height: 25rem;
     background: rgba(24, 24, 24, 1) ;
     border-radius: 10px;
@@ -21,6 +21,7 @@
     justify-content: space-between;
     margin: .5rem;
     color: white;
+    gap: 30px;
 }
 .queue .song:hover{
 background-color: #6d90c5;
@@ -38,7 +39,7 @@ background-color: #6d90c5;
 
 @media only screen and (max-width :690px){
     .queue{
-        bottom: 10rem;
+        bottom: 15rem;
         width: 95%;
     }
 }

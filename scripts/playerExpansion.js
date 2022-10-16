@@ -1,5 +1,6 @@
 import  {  playerimg, currentTime, totalDuration }  from "./musiclibrary.js";
 import  { volumepanel } from "./Volume.js";
+import  { htmlqueue, queueshown, showQueue } from "./queue.js";
 
  let expandbutton    = document.querySelector('.expand')
  let player          = document.querySelector('.player')
@@ -9,7 +10,7 @@ import  { volumepanel } from "./Volume.js";
  let expanded        = false
 
 
-export function expandPlayer(expanded,mobile){
+ function expandPlayer(expanded,mobile){
     
     if(!expanded){
         player.style.height = '100%'
@@ -20,8 +21,7 @@ export function expandPlayer(expanded,mobile){
 
         if (mobile){
             expandedplayer.style.flexDirection = 'row'
-            volumepanel.style.bottom = '13%'
-            volumepanel.style.right = '34%'
+
         }
         else{
             volumepanel.style.bottom = '15%'
@@ -40,7 +40,7 @@ export function expandPlayer(expanded,mobile){
     }
 }
 
-export function expandPlayerimg(expanded,mobile){
+ function expandPlayerimg(expanded,mobile){
     if(!expanded){
         playerimg.style.borderRadius = '10px'
         playerimg.style.width = '20rem'
@@ -51,7 +51,7 @@ export function expandPlayerimg(expanded,mobile){
     }
 }
 
-export function expandButtons(expanded,mobile){
+ function expandButtons(expanded,mobile){
     if(mobile){
     if(!expanded){
         buttongroup.setAttribute('style','display : flex !important')
@@ -62,7 +62,7 @@ export function expandButtons(expanded,mobile){
 }
 }
 
-export function expandTime(expanded,mobile){
+ function expandTime(expanded,mobile){
     if(mobile){
     if(!expanded){
         currentTime.style.display='block'
@@ -78,14 +78,27 @@ export function expandTime(expanded,mobile){
 }
 }
 
+function expandQueueView(expanded){
+    !expanded ?
+    (htmlqueue.style.bottom = '42%',htmlqueue.style.right = '37.5%'):(htmlqueue.style.bottom = '7rem',htmlqueue.style.right = '0.5rem')
+}
 
 function expand(){
+    
     let mobile = window.matchMedia("(max-width: 690px)").matches
     expandPlayer(expanded,mobile)
     expandPlayerimg(expanded,mobile)
     expandButtons(expanded,mobile)
     expandTime(expanded,mobile)
-    expanded ? expanded = false : expanded = true 
+    expandQueueView(expanded)
+    
+    if (expanded) {
+        expanded = false 
+        if (queueshown && mobile) {
+            showQueue()
+        }
+    }
+    else expanded = true 
 }
 
 
