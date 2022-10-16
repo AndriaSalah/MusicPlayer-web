@@ -39,17 +39,16 @@
     /* border: solid 1px black; */
 }
 .song .buttons button{
-    width: 5vh;
-    height: 5vh;
+    width: 3rem;
+    height: 3rem;
     margin-left: 4vw;
     border-radius: 100%;
     border: none;
     font-size: 20px;
     transition-duration: 0.1s ;
     background-color: #cccccc;
+    color:black;
     /* iphone fix */
-    align-items: center;
-    justify-content: center;
 }
 .song .buttons .addbutton{
     background-color: transparent;
@@ -124,4 +123,12 @@
   .song{
     height: 5vh;
   }
+
+.song .buttons button{
+width: 2.5rem;
+height: 2.5rem;
 }
+}
+/* @supports (-webkit-touch-callout: none) {
+    
+  } */

@@ -47,7 +47,6 @@
 .player button{
     display: flex;
     flex-wrap: wrap;
-    height: 4vh;
     margin-right:0.3rem;
     margin-left: 0.5rem;
     border-radius: 100%;
