@@ -479,6 +479,7 @@ loadTrack()
 }
 
 else{
+    
     initPrevSess()    
     for ( var i = 0 ; i < MusicLibraries[currentLibrary].length ; i ++) {
         var songDetails = MusicLibraries[currentLibrary][i]
@@ -494,6 +495,9 @@ else{
     if(QueueSong == null){
         loadTrack(currentLibrary)
         Queue = previousSession.Queue
+        for (let song in Queue) {
+            viewOnQueue(Queue[song])
+        }
     }
     else{
         Queue = previousSession.Queue
