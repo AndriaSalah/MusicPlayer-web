@@ -238,7 +238,10 @@ function next(){
     else{
         
         loadTrack(null)
-        play();
+        if(isplaying){
+            currentTrack.play()
+        }
+        else {play()}
     }
     
 
@@ -279,8 +282,12 @@ function prev(){
     else  shuffle()
     }
     else{
-        loadTrack(null)
-        currentTrack.play();
+        resetValues()
+        currentTrack.currentTime = 0
+        if(isplaying){
+            currentTrack.play()
+        }
+        else {play()}
     }
 
 }
