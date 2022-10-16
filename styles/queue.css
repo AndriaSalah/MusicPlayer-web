@@ -40,7 +40,7 @@ background-color: #6d90c5;
 @media only screen and (max-width :690px){
     .queue{
         bottom: 15rem !important;
-        right: 0px !important;
+        right: 2.5% !important;
         width: 95%;
     }
 }
