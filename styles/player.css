@@ -81,92 +81,96 @@
 }
 
 
-input[type=range] {
-    width: 100%;
-    margin: 8.15px 0;
-    background-color: transparent;
-    -webkit-appearance: none;
-  }
-  input[type=range]:focus {
-    outline: none;
-  }
-  input[type=range]::-webkit-slider-runnable-track {
-    background: rgba(51, 113, 169, 0.78);
-    border: 0;
-    border-radius: 10px;
-    width: 100%;
-    height: 5.7px;
-    cursor: pointer;
-  }
-  input[type=range]::-webkit-slider-thumb {
-    margin-top: -8.15px;
-    width: 22px;
-    height: 22px;
-    background: #4f89df;
-    border: 1.8px solid rgba(0, 0, 0, 0);
-    border-radius: 50px;
-    cursor: pointer;
-    -webkit-appearance: none;
-  }
-  input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #5795cc;
-  }
-  input[type=range]::-moz-range-track {
-    background: rgba(51, 113, 169, 0.78);
-    border: 0;
-    border-radius: 10px;
-    width: 100%;
-    height: 5.7px;
-    cursor: pointer;
-  }
-  input[type=range]::-moz-range-thumb {
-    width: 22px;
-    height: 22px;
-    background: #4f89df;
-    border: 1.8px solid rgba(0, 0, 0, 0);
-    border-radius: 50px;
-    cursor: pointer;
-  }
-  input[type=range]::-ms-track {
-    background: transparent;
-    border-color: transparent;
-    border-width: 9.05px 0;
-    color: transparent;
-    width: 100%;
-    height: 5.7px;
-    cursor: pointer;
-  }
-  input[type=range]::-ms-fill-lower {
-    background: #224c72;
-    border: 0;
-    border-radius: 20px;
-  }
-  input[type=range]::-ms-fill-upper {
-    background: rgba(51, 113, 169, 0.78);
-    border: 0;
-    border-radius: 20px;
-  }
-  input[type=range]::-ms-thumb {
-    width: 22px;
-    height: 22px;
-    background: #4f89df;
-    border: 1.8px solid rgba(0, 0, 0, 0);
-    border-radius: 50px;
-    cursor: pointer;
-    margin-top: 0px;
+input[type=range].trackseeker {
+  width: 100%;
+  margin: 9.65px 0;
+  background-color: transparent;
+  -webkit-appearance: none;
+}
+input[type=range].trackseeker:focus {
+  outline: none;
+}
+input[type=range].trackseeker::-webkit-slider-runnable-track {
+  background: rgba(0, 133, 229, 0.78);
+  border: 0;
+  border-radius: 10px;
+  width: 100%;
+  height: 5.7px;
+  cursor: pointer;
+}
+input[type=range].trackseeker::-webkit-slider-thumb {
+  margin-top: -9.65px;
+  width: 35px;
+  height: 25px;
+  background: #4f89df;
+  border: 1.8px solid rgba(0, 0, 0, 0);
+  border-radius: 50px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+input[type=range].trackseeker:focus::-webkit-slider-runnable-track {
+  background: #8ed0ff;
+}
+input[type=range].trackseeker::-moz-range-track {
+  background: rgba(0, 133, 229, 0.78);
+  border: 0;
+  border-radius: 10px;
+  width: 100%;
+  height: 5.7px;
+  cursor: pointer;
+}
+input[type=range].trackseeker::-moz-range-thumb {
+  width: 35px;
+  height: 25px;
+  background: #4f89df;
+  border: 1.8px solid rgba(0, 0, 0, 0);
+  border-radius: 50px;
+  cursor: pointer;
+}
+input[type=range].trackseeker::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  border-width: 10.55px 0;
+  color: transparent;
+  width: 100%;
+  height: 5.7px;
+  cursor: pointer;
+}
+input[type=range].trackseeker::-ms-fill-lower {
+  background: #00233d;
+  border: 0;
+  border-radius: 20px;
+}
+input[type=range].trackseeker::-ms-fill-upper {
+  background: rgba(0, 133, 229, 0.78);
+  border: 0;
+  border-radius: 20px;
+}
+input[type=range].trackseeker::-ms-thumb {
+  width: 35px;
+  height: 25px;
+  background: #4f89df;
+  border: 1.8px solid rgba(0, 0, 0, 0);
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 0px;
 
+}
+input[type=range].trackseeker:focus::-ms-fill-lower {
+  background: rgba(0, 133, 229, 0.78);
+}
+input[type=range].trackseeker:focus::-ms-fill-upper {
+  background: #8ed0ff;
+}
+
+@supports (-ms-ime-align:auto) {
+
+  input[type=range].trackseeker {
+    margin: 0;
+  
   }
-  input[type=range]:focus::-ms-fill-lower {
-    background: rgba(51, 113, 169, 0.78);
-  }
-  input[type=range]:focus::-ms-fill-upper {
-    background: #5795cc;
-  }
-  @supports (-ms-ime-align:auto) {
-    input[type=range] {
-      margin: 0;
-    }
-  }
+}
+
   
   input[type=range].volumeSeeker {
     width: 100%;
@@ -178,7 +182,7 @@ input[type=range] {
     outline: none;
   }
   input[type=range].volumeSeeker::-webkit-slider-runnable-track {
-    background: rgba(51, 113, 169, 0.78);
+    background: rgba(0, 133, 229, 0.78);
     border: 0;
     border-radius: 10px;
     width: 100%;
@@ -187,7 +191,7 @@ input[type=range] {
   }
   input[type=range].volumeSeeker::-webkit-slider-thumb {
     margin-top: -6.15px;
-    width: 18px;
+    width: 19px;
     height: 18px;
     background: #4f89df;
     border: 1.8px solid rgba(0, 0, 0, 0);
@@ -196,10 +200,10 @@ input[type=range] {
     -webkit-appearance: none;
   }
   input[type=range].volumeSeeker:focus::-webkit-slider-runnable-track {
-    background: #5795cc;
+    background: #89ceff;
   }
   input[type=range].volumeSeeker::-moz-range-track {
-    background: rgba(51, 113, 169, 0.78);
+    background: rgba(0, 133, 229, 0.78);
     border: 0;
     border-radius: 10px;
     width: 100%;
@@ -207,7 +211,7 @@ input[type=range] {
     cursor: pointer;
   }
   input[type=range].volumeSeeker::-moz-range-thumb {
-    width: 18px;
+    width: 19px;
     height: 18px;
     background: #4f89df;
     border: 1.8px solid rgba(0, 0, 0, 0);
@@ -224,17 +228,17 @@ input[type=range] {
     cursor: pointer;
   }
   input[type=range].volumeSeeker::-ms-fill-lower {
-    background: #224c72;
+    background: #002642;
     border: 0;
     border-radius: 20px;
   }
   input[type=range].volumeSeeker::-ms-fill-upper {
-    background: rgba(51, 113, 169, 0.78);
+    background: rgba(0, 133, 229, 0.78);
     border: 0;
     border-radius: 20px;
   }
   input[type=range].volumeSeeker::-ms-thumb {
-    width: 18px;
+    width: 19px;
     height: 18px;
     background: #4f89df;
     border: 1.8px solid rgba(0, 0, 0, 0);
@@ -244,10 +248,10 @@ input[type=range] {
 
   }
   input[type=range].volumeSeeker:focus::-ms-fill-lower {
-    background: rgba(51, 113, 169, 0.78);
+    background: rgba(0, 133, 229, 0.78);
   }
   input[type=range].volumeSeeker:focus::-ms-fill-upper {
-    background: #5795cc;
+    background: #89ceff;
   }
 
   @supports (-ms-ime-align:auto) {
@@ -257,6 +261,7 @@ input[type=range] {
 
     }
   }
+  
   
 
 .volume{
