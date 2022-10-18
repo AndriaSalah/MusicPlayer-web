@@ -49,6 +49,7 @@
     background-color: #cccccc;
     color:black;
     /* iphone fix */
+    text-align: center;
 }
 .song .buttons .addbutton{
     background-color: transparent;
