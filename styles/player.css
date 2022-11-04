@@ -5,7 +5,7 @@
     align-items: center;
     position: sticky;
     bottom: 0;
-    height: 11vh;
+    height: 7.3rem;
     background-color: rgba(24, 24, 24, 1) ;
     justify-content: space-evenly;
     z-index: 0; 
@@ -169,18 +169,16 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  
-
 }
 
 .player .pallets{
   display: flex;
   flex-direction: column-reverse;
   width: fit-content;
-  height: 200%;
+  height: 15rem;
   position: absolute;
   right: 1% ;
-  bottom:7rem;
+  bottom:8rem;
   background-color: transparent;
   transition-duration: 0.3s;
   align-items: center;
@@ -194,16 +192,23 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
   height: 2rem;
 }
 .player .pallets .colorButton:nth-child(2){
-  background-color: red;
+  background-color: #24293E ;
   transition-delay: 0.1s;
 }
 .player .pallets .colorButton:nth-child(3){
-  background-color: purple;
+  background-color: red;
   transition-delay: 0.2s;
 }
 .player .pallets .colorButton:nth-child(4){
-  background-color: black;
+  background-color: purple;
   transition-delay: 0.3s;
+}
+.player .pallets .colorButton:nth-child(5){
+  background-color: black;
+  transition-delay: 0.4s;
+}
+.activeTheme{
+  border: 2px solid rgb(175, 175, 175) !important;
 }
 @supports (-ms-ime-align:auto) {
 
