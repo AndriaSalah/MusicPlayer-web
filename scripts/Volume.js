@@ -2,7 +2,7 @@ import { currentTrack } from "./musiclibrary"
 
 export let volumepanel     = document.querySelector('.volume')
 export let volumeseeker    = document.querySelector('.volumeSeeker')
-let volumeButton           = document.querySelector('.volumeButton')
+export let volumeButton           = document.querySelector('.volumeButton')
 let volumeshown            = false
 let volumePanelTimer
 

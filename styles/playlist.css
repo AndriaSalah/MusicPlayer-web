@@ -87,13 +87,30 @@
     width:85%;
     margin: auto;
 }
-.nowplaying{
+.nowplayingd{
     background-color: #6d90c5 !important;
     position: sticky;
     top: 0;
     bottom: 0;
 }
-
+.nowplayingR{
+    background-color: #c5826d !important;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+}
+.nowplayingP{
+    background-color: #a36dc5 !important;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+}
+.nowplayingB{
+    background-color: #858585 !important;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+}
 
 .playlist::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.76);

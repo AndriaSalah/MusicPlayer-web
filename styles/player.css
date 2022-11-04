@@ -163,6 +163,48 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
   background: #8ed0ff;
 }
 
+.player .palletButton{
+  color: white;
+  background-color: #6d90c5;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  
+
+}
+
+.player .pallets{
+  display: flex;
+  flex-direction: column-reverse;
+  width: fit-content;
+  height: 200%;
+  position: absolute;
+  right: 1% ;
+  bottom:7rem;
+  background-color: transparent;
+  transition-duration: 0.3s;
+  align-items: center;
+  border-radius: 33%;
+}
+.player .colorButton{
+  visibility: hidden;
+  opacity: 0;
+  margin-bottom: 1rem;
+  width: 2rem;
+  height: 2rem;
+}
+.player .pallets .colorButton:nth-child(2){
+  background-color: red;
+  transition-delay: 0.1s;
+}
+.player .pallets .colorButton:nth-child(3){
+  background-color: purple;
+  transition-delay: 0.2s;
+}
+.player .pallets .colorButton:nth-child(4){
+  background-color: black;
+  transition-delay: 0.3s;
+}
 @supports (-ms-ime-align:auto) {
 
   input[type=range].trackseeker {

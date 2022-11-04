@@ -1,6 +1,7 @@
 import { MusicLibraries } from "/scripts/albums.js"
 import { volumeseeker } from "./Volume.js"
 import { showQueue, updateQueueView, viewOnQueue } from "./queue.js"
+import { ChangeTitleColor, chooseTheme, orignalTheme, removeOldTheme, switchTheme, themeNumber } from "./ThemeManager.js"
 
 
 
@@ -11,11 +12,11 @@ let playlist               = document.querySelector('.playlist')
 let playerTrackName        = document.querySelector('.playerTrackName')
 export let currentTime     = document.querySelector('.currentTime')
 export let totalDuration   = document.querySelector('.totalDuration')
-let shuffleButton          = document.querySelector('.shuffleButton')
+export let shuffleButton          = document.querySelector('.shuffleButton')
 let playerPlayButton       = document.querySelector('.playbutton i')
-let playbutton             = document.querySelector('.playbutton')
-let prv                    = document.querySelector('.prev') 
-let nxt                    = document.querySelector('.next') 
+export let playbutton             = document.querySelector('.playbutton')
+export let prv                    = document.querySelector('.prev') 
+export let nxt                    = document.querySelector('.next') 
 let rocklibrary            = document.querySelector('.rock')
 let poplibrary             = document.querySelector('.pop')
 let mixlibrary             = document.querySelector('.dailyMix')
@@ -30,11 +31,11 @@ let currentLibrary         = 4
 let nowplayinglibrary      = 4
 let updateTimer
 let libraryspan
-let librarytitle
+export let librarytitle
 let oldIndex = 1
 export let Queue = []
 let QueueSong 
-let nowplaying
+export let nowplaying
 let playListPlayButton
 let nowPlayingSong = {index : 0 ,library : 4}
 
@@ -164,40 +165,41 @@ function highlightLibrary(){
         case 0 :    
         if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')
         librarytitle = document.querySelector('.rock #libraryTitle')
-        librarytitle.style.color = '#6d90c5'
+        ChangeTitleColor()
         libraryspan  = document.querySelector('.rock span')
         libraryspan.style.opacity = 1
         break
         case 1 :  
         if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')
         librarytitle = document.querySelector('.pop #libraryTitle')
-        librarytitle.style.color = '#6d90c5' 
+        ChangeTitleColor()
         libraryspan  = document.querySelector('.pop span')
         libraryspan.style.opacity = 1
         break     
         case 2 :   
         if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style') 
         librarytitle = document.querySelector('.imagineDragons #libraryTitle')
-        librarytitle.style.color = '#6d90c5'
+        ChangeTitleColor()
         libraryspan  = document.querySelector('.imagineDragons span')
         libraryspan.style.opacity = 1
         break
         case 3 : 
         if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')   
         librarytitle = document.querySelector('.sadNchill #libraryTitle')
-        librarytitle.style.color = '#6d90c5'
+        ChangeTitleColor()
         libraryspan  = document.querySelector('.sadNchill span')
         libraryspan.style.opacity = 1
         break    
         case 4 :
         if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')
         librarytitle = document.querySelector('.dailyMix #libraryTitle')
-        librarytitle.style.color = '#6d90c5' 
+        ChangeTitleColor() 
         libraryspan  = document.querySelector('.dailyMix span')
         libraryspan.style.opacity = 1
         break     
     }
 }
+
 function next(){
     
     if(Queue.length == 0 ){
@@ -339,20 +341,20 @@ function playat(index){
     
 }
 
-function NowPlaying(index,operation){
+export function NowPlaying(index,operation){
     if(operation === 'remove'){
-        nowplaying.classList.remove('nowplaying');
+        removeOldTheme()
         playListPlayButton.classList.replace('fa-pause','fa-play')
     }
     else {
         nowplaying = document.querySelector(`.song:nth-of-type(${index})`)
-        nowplaying.classList.add('nowplaying');
+        chooseTheme()    
         playListPlayButton = document.querySelector(`.song:nth-of-type(${index}) button:nth-of-type(2) i`)
         playListPlayButton.classList.replace('fa-play','fa-pause')
         
     }
     
-}
+    }
 
 function addToQueue(index){
 Queue.push(MusicLibraries[currentLibrary][index]) 
@@ -442,7 +444,8 @@ window.addEventListener('unload',()=>{
         QueueSong,
         volume : currentTrack.volume,
         shuffleState : shuffling,
-        nowplayinglibrary
+        nowplayinglibrary,
+        themeNumber
     }
     localStorage.setItem('previousSession',JSON.stringify(previousSession))
 })    
@@ -458,6 +461,8 @@ function initPrevSess(){
     currentTrack.volume = volumeseeker.value / 100
     nowplayinglibrary = previousSession.nowplayinglibrary
     if(previousSession.shuffleState == true) enableshuffle()
+    
+
 
 }
 // initialising the default playlist and setting the volume to 20 % and loading the tracks from the playlists
@@ -472,7 +477,7 @@ for ( var i = 0 ; i < MusicLibraries[4].length ; i ++) {
 
 
 nowplaying = document.querySelector('.song:nth-of-type(1)')
-nowplaying.classList.add('nowplaying')
+nowplaying.classList.add('nowplayingd')
 playListPlayButton = document.querySelector(`.song:nth-of-type(1) button:nth-of-type(2) i`)
 loadTrack()
 
@@ -489,7 +494,7 @@ else{
     
     QueueSong = previousSession.QueueSong
     nowplaying = document.querySelector(`.song:nth-of-type(${currentIndex+1})`)
-    nowplaying.classList.add('nowplaying')
+    nowplaying.classList.add('nowplayingd')
     playListPlayButton = document.querySelector(`.song:nth-of-type(${currentIndex+1}) button:nth-of-type(2) i`)
     currentTrack.currentTime = previousSession.tracktime
     if(QueueSong == null){
@@ -508,5 +513,6 @@ else{
     }
     currentTrack.currentTime = previousSession.tracktime
     highlightLibrary()
+    switchTheme(previousSession.themeNumber)
 }    
 //----------------------------------------------------------------------------------------------------

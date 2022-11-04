@@ -2,10 +2,10 @@ import  {  playerimg, currentTime, totalDuration }  from "./musiclibrary.js";
 import  { volumepanel } from "./Volume.js";
 import  { htmlqueue, queueshown, showQueue } from "./queue.js";
 
- let expandbutton    = document.querySelector('.expand')
+export let expandbutton    = document.querySelector('.expand')
  let player          = document.querySelector('.player')
  let expandedplayer  = document.querySelector('.expandedplayer')
- let body            = document.querySelector('body')
+ export let body            = document.querySelector('body')
  let buttongroup     = document.querySelector('.buttongroup') 
  let expanded        = false
 
