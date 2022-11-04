@@ -20,7 +20,6 @@ that should exist in a music player, if u like it, leave a star on it
 
 ## Screenshots
 ### mobile Version
-![Screenshot 2022-10-18 195554](https://user-images.githubusercontent.com/74527457/199410561-2d51e24f-cc81-4874-b52a-6c2415327484.png)
 ![Screenshot 2022-11-02 080951](https://user-images.githubusercontent.com/74527457/199411543-3facd574-7cd3-4e9a-bdfa-aa5cca199ef0.png)
 ![Screenshot 2022-10-18 195906](https://user-images.githubusercontent.com/74527457/199411546-4346dfed-c04c-49d5-b8fd-3c4f171b422b.png)
 ![Screenshot 2022-11-02 080842](https://user-images.githubusercontent.com/74527457/199411548-90a7b11b-7f03-4dec-a817-e3b4c5f69cb3.png)
