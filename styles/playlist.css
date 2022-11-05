@@ -58,7 +58,7 @@
    
 }
 .song .buttons button:hover{
-    background-color: #458cf78f;
+    background-color: var(--hover);
 }
 .song button img{
     width: 1.5vw;

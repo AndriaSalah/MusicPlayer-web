@@ -1,4 +1,9 @@
+:root{
+  --hover:#8cacdd63;
+  --trackBar:#0085e5c7;
+  --trackThumb:#4f89df;
 
+}
 .player{
     width: 100%;
     display: flex;
@@ -63,7 +68,7 @@
     aspect-ratio: 1/1;
 }
 .player button:hover{
-    background-color: #8cacdd63;
+    background-color: var(--hover);
 }
 
 .player .track{
@@ -91,7 +96,7 @@ input[type=range].trackseeker:focus {
   outline: none;
 }
 input[type=range].trackseeker::-webkit-slider-runnable-track {
-  background: rgba(0, 133, 229, 0.78);
+  background:var(--trackBar);
   border: 0;
   border-radius: 10px;
   width: 100%;
@@ -102,7 +107,7 @@ input[type=range].trackseeker::-webkit-slider-thumb {
   margin-top: -9.65px;
   width: 35px;
   height: 25px;
-  background: #4f89df;
+  background: var(--trackThumb);
   border: 1.8px solid rgba(0, 0, 0, 0);
   border-radius: 50px;
   cursor: pointer;
@@ -112,7 +117,7 @@ input[type=range].trackseeker:focus::-webkit-slider-runnable-track {
   background: #8ed0ff;
 }
 input[type=range].trackseeker::-moz-range-track {
-  background: rgba(0, 133, 229, 0.78);
+  background: var(--trackBar);
   border: 0;
   border-radius: 10px;
   width: 100%;
@@ -122,7 +127,7 @@ input[type=range].trackseeker::-moz-range-track {
 input[type=range].trackseeker::-moz-range-thumb {
   width: 35px;
   height: 25px;
-  background: #4f89df;
+  background: var(--trackThumb);
   border: 1.8px solid rgba(0, 0, 0, 0);
   border-radius: 50px;
   cursor: pointer;
@@ -149,7 +154,7 @@ input[type=range].trackseeker::-ms-fill-upper {
 input[type=range].trackseeker::-ms-thumb {
   width: 35px;
   height: 25px;
-  background: #4f89df;
+  background: var(--trackThumb);
   border: 1.8px solid rgba(0, 0, 0, 0);
   border-radius: 50px;
   cursor: pointer;
@@ -174,38 +179,43 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
 .player .pallets{
   display: flex;
   flex-direction: column-reverse;
-  width: fit-content;
-  height: 15rem;
+  width: 3.5rem;
+  height: 3.5rem;
   position: absolute;
   right: 1% ;
   bottom:8rem;
   background-color: transparent;
-  transition-duration: 0.3s;
+  transition-duration: 0.5s;
   align-items: center;
-  border-radius: 33%;
+  justify-content: center;
+  border-radius: 35px;
+  z-index: 0;
+  
 }
 .player .colorButton{
   visibility: hidden;
   opacity: 0;
+  position: absolute;
   margin-bottom: 1rem;
   width: 2rem;
   height: 2rem;
+  border: 1px solid #00000063;
 }
 .player .pallets .colorButton:nth-child(2){
-  background-color: #24293E ;
-  transition-delay: 0.1s;
+  background-color: #3e4b7c ;
+  /* transition-delay: 0.1s; */
 }
 .player .pallets .colorButton:nth-child(3){
-  background-color: red;
-  transition-delay: 0.2s;
+  background-color: rgb(122, 73, 73);
+  /* transition-delay: 0.2s; */
 }
 .player .pallets .colorButton:nth-child(4){
-  background-color: purple;
-  transition-delay: 0.3s;
+  background-color:rgb(135, 89, 151);
+  /* transition-delay: 0.3s; */
 }
 .player .pallets .colorButton:nth-child(5){
   background-color: black;
-  transition-delay: 0.4s;
+  /* transition-delay: 0.3s; */
 }
 .activeTheme{
   border: 2px solid rgb(175, 175, 175) !important;
@@ -229,7 +239,7 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
     outline: none;
   }
   input[type=range].volumeSeeker::-webkit-slider-runnable-track {
-    background: rgba(0, 133, 229, 0.78);
+    background: #0085e5c7;
     border: 0;
     border-radius: 10px;
     width: 100%;
@@ -401,11 +411,7 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
     height: 100%;
     /* margin-bottom: 55%; */
 }
-/* .volumeSeeker::-webkit-slider-thumb{
-    appearance: unset;
-    visibility: visible;
-    opacity: 1;
-} */
+
 .trackDetails{
     font-size:10px;
 }

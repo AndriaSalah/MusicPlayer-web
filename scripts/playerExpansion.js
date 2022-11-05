@@ -1,6 +1,7 @@
 import  {  playerimg, currentTime, totalDuration }  from "./musiclibrary.js";
 import  { volumepanel } from "./Volume.js";
 import  { htmlqueue, queueshown, showQueue } from "./queue.js";
+import { pallets } from "./ThemeManager.js";
 
 export let expandbutton    = document.querySelector('.expand')
  let player          = document.querySelector('.player')
@@ -8,6 +9,7 @@ export let expandbutton    = document.querySelector('.expand')
  export let body            = document.querySelector('body')
  let buttongroup     = document.querySelector('.buttongroup') 
  let expanded        = false
+
 
 
  function expandPlayer(expanded,mobile){
@@ -18,7 +20,8 @@ export let expandbutton    = document.querySelector('.expand')
         player.style.zIndex = 3
         body.style.overflowY = 'hidden'
         expandbutton.style.transform = 'rotate(180deg)'
-
+        pallets.style.visibility = "hidden"
+        pallets.style.opacity = 0
         if (mobile){
             expandedplayer.style.flexDirection = 'row'
 
@@ -31,11 +34,15 @@ export let expandbutton    = document.querySelector('.expand')
     else{
         player.removeAttribute('style') 
         player.style.zIndex = 3
-        body.removeAttribute('style') 
-        expandbutton.removeAttribute('style') 
+        body.style.overflowY = '' 
+        expandbutton.style.transform = 'rotate(0)'
         expandedplayer.removeAttribute('style') 
         volumepanel.removeAttribute('style') 
-            
+        setTimeout(()=>{
+            pallets.style.visibility = "visible"
+            pallets.style.opacity = 1
+        },700)
+        
         
     }
 }

@@ -1,7 +1,7 @@
 import { MusicLibraries } from "/scripts/albums.js"
 import { volumeseeker } from "./Volume.js"
 import { showQueue, updateQueueView, viewOnQueue } from "./queue.js"
-import { ChangeTitleColor, chooseTheme, orignalTheme, removeOldTheme, switchTheme, themeNumber } from "./ThemeManager.js"
+import { ChangeTitleColor, chooseTheme, orignalTheme, removeOldTheme, switchColor, switchTheme, themeNumber } from "./ThemeManager.js"
 
 
 
@@ -23,7 +23,7 @@ let mixlibrary             = document.querySelector('.dailyMix')
 let imaginelibrary         = document.querySelector('.imagineDragons')
 let sadnchill              = document.querySelector('.sadNchill')
 export let queuebutton            = document.querySelector('.queuebutton')
-let shuffling              = false
+export let shuffling              = false
 let rand_check             = false
 let currentIndex           = 0
 let isplaying              = false
@@ -391,8 +391,9 @@ function shuffle(){
     }
 
 function enableshuffle(){
-    shuffling? (shuffling=false , shuffleButton.removeAttribute('style')):
-    (shuffling = true , shuffleButton.style.backgroundColor = '#6d90c5', shuffleButton.style.color = 'white' )
+    
+    shuffling? (shuffling=false ,switchColor(shuffleButton,"shuffle")  ):
+    (shuffling = true ,switchColor(shuffleButton,"shuffle"))
 }
 
 function seekTo(){
