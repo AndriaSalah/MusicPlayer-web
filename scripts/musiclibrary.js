@@ -421,11 +421,11 @@ function loadLibrary(libraryNumber){
 }
 
 function removeLoadingScreen(){
+    debugger
     let loadingContainer = document.querySelector(".loadingContainer")
     let loadingScreen = document.querySelector(".spinner")
     loadingScreen.style.opacity , loadingContainer.style.opacity = 0
-    loadingScreen.style.visibility , loadingContainer.style.visibility = 'hidden'
-   
+    let x = setTimeout(()=>{loadingScreen.style.display , loadingContainer.style.display = 'none'},150)
     
 }
 
