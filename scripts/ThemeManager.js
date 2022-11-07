@@ -1,6 +1,6 @@
 import { librarytitle, nowplaying, NowPlaying, nxt, playbutton, prv, queuebutton, shuffleButton, shuffling } from "./musiclibrary"
 import { body, expandbutton } from "./playerExpansion"
-import { volumeButton, volumepanel } from "./Volume"
+import { volumeButton, volumepanel, volumeshown } from "./Volume"
 import { htmlqueue } from "./queue"
 
 let palleteButton  = document.querySelector(".palletButton")
@@ -60,40 +60,33 @@ let colorLibrary=[
 function expand(){
     if(!expanded){
     pallets.style.height = "17rem"
-
+    pallets.style.backgroundColor = colorLibrary[themeNumber].trackthumb
     setTimeout(()=>{ 
+        
         colorButton0.style.position = "static"
         colorButton1.style.position = "static"
         colorButton2.style.position = "static"
         colorButton3.style.position = "static"
         colorButton0.style.visibility = "visible"
         colorButton0.style.opacity = 1
-       // colorButton0.style.position = "static"
-    
+       
         colorButton1.style.visibility = "visible"
         colorButton1.style.opacity = 1
-        //colorButton1.style.position = "static"
-    
+  
         colorButton2.style.visibility = "visible"
         colorButton2.style.opacity = 1
-        //colorButton2.style.position = "static"
-    
+       
         colorButton3.style.visibility = "visible"
         colorButton3.style.opacity = 1
-        //colorButton3.style.position = "static"
+
+       
     },150)
-
-
-
-    
-    
-
-   
     expanded = true
     }
     else{
         expanded = false
         pallets.style.height = "3.5rem"
+        pallets.style.backgroundColor = "transparent"
         colorButton0.removeAttribute('Style')
         colorButton1.removeAttribute('Style')
         colorButton2.removeAttribute('Style')
@@ -121,42 +114,59 @@ export function switchTheme(theme){
                 switchColor(expandbutton,"accent")
                 switchColor(pseudoColors,"pseudo")
                 palleteButton.style.backgroundColor = colorLibrary[themeNumber].trackthumb
-                pallets.style.backgroundColor = colorLibrary[themeNumber].trackthumb
+                if(expanded){
+                    pallets.style.backgroundColor = colorLibrary[themeNumber].trackthumb
+                }
                 updateNowPlaying()
                 ChangeTitleColor()
              
     }
 
 export function switchColor(element,type){
-        if(type === "body" || type === "Body"){
-            element.style.backgroundColor = colorLibrary[themeNumber].BodyColor
-        }
-        else if(type === "background" || type === "bg"){
-            element.style.backgroundColor = colorLibrary[themeNumber].accentColor
-        }
-        else if (type==="accent"||type==="Accent"){
-            element.style.color = colorLibrary[themeNumber].accentColor
-        }
-        else if (type === "border"){
-            element.style.borderBottom = `solid 10px ${colorLibrary[themeNumber].accentColor}`
-        }
-        else if (type === "pseudo"){
-            element.style.setProperty("--hover",colorLibrary[themeNumber].hover)
-            element.style.setProperty("--trackBar",colorLibrary[themeNumber].accentColor)
-            element.style.setProperty("--trackThumb",colorLibrary[themeNumber].trackthumb)
-        }
-        else if(type === "shuffle"){
-            if(shuffling){
+        switch (type) {
+            case "body" || "Body" :
+                element.style.backgroundColor = colorLibrary[themeNumber].BodyColor
+                break;
+            case "background" ||  "bg":
                 element.style.backgroundColor = colorLibrary[themeNumber].accentColor
-                 element.style.color = "white"
-            }
-            else {
+                break;
+            case "accent"||"Accent" :
                 element.style.color = colorLibrary[themeNumber].accentColor
-                element.style.backgroundColor = ""
+                break;
+            case "border"|| "Border":
+                element.style.borderBottom = `solid 10px ${colorLibrary[themeNumber].accentColor}`
+                break;
+            case "pseudo"||"Pseudo" :
+                element.style.setProperty("--hover",colorLibrary[themeNumber].hover)
+                element.style.setProperty("--trackBar",colorLibrary[themeNumber].accentColor)
+                element.style.setProperty("--trackThumb",colorLibrary[themeNumber].trackthumb)
+                break;
+            case "shuffle" || "Shuffle":
+                if(shuffling){
+                    element.style.backgroundColor = colorLibrary[themeNumber].accentColor
+                    element.style.color = "white"
                 }
-            }
+                else {
+                    element.style.color = colorLibrary[themeNumber].accentColor
+                    element.style.backgroundColor = ""
+                    }
+                break;
 
-            else throw console.error("element is not defined in this function");
+            case "volume" || "Volume" :
+                    if(volumeshown){
+                        element.style.backgroundColor = colorLibrary[themeNumber].accentColor
+                        element.style.color = "white"
+                    }
+                    else {
+                        element.style.color = colorLibrary[themeNumber].accentColor
+                        element.style.backgroundColor = ""
+                        }
+                    break;
+            default:
+                throw console.error("element is not defined in this function");
+        }        
+
+            
         }
     
 export function updateNowPlaying(){

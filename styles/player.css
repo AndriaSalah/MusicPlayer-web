@@ -239,7 +239,7 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
     outline: none;
   }
   input[type=range].volumeSeeker::-webkit-slider-runnable-track {
-    background: #0085e5c7;
+    background:var(--trackBar);
     border: 0;
     border-radius: 10px;
     width: 100%;
@@ -250,7 +250,7 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
     margin-top: -6.15px;
     width: 19px;
     height: 18px;
-    background: #4f89df;
+    background:  var(--trackThumb);
     border: 1.8px solid rgba(0, 0, 0, 0);
     border-radius: 50px;
     cursor: pointer;
@@ -260,7 +260,7 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
     background: #89ceff;
   }
   input[type=range].volumeSeeker::-moz-range-track {
-    background: rgba(0, 133, 229, 0.78);
+    background: var(--trackBar);
     border: 0;
     border-radius: 10px;
     width: 100%;
@@ -270,7 +270,7 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
   input[type=range].volumeSeeker::-moz-range-thumb {
     width: 19px;
     height: 18px;
-    background: #4f89df;
+    background:  var(--trackThumb);
     border: 1.8px solid rgba(0, 0, 0, 0);
     border-radius: 50px;
     cursor: pointer;
@@ -290,14 +290,14 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
     border-radius: 20px;
   }
   input[type=range].volumeSeeker::-ms-fill-upper {
-    background: rgba(0, 133, 229, 0.78);
+    background: var(--trackBar);
     border: 0;
     border-radius: 20px;
   }
   input[type=range].volumeSeeker::-ms-thumb {
     width: 19px;
     height: 18px;
-    background: #4f89df;
+    background:  var(--trackThumb);
     border: 1.8px solid rgba(0, 0, 0, 0);
     border-radius: 50px;
     cursor: pointer;
@@ -305,7 +305,7 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
 
   }
   input[type=range].volumeSeeker:focus::-ms-fill-lower {
-    background: rgba(0, 133, 229, 0.78);
+    background: var(--trackBar);
   }
   input[type=range].volumeSeeker:focus::-ms-fill-upper {
     background: #89ceff;
@@ -391,14 +391,14 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
     height: 3.5rem;
 }
 .player {
-    border-top: solid white 1px;
-    
+    border-top: solid var(--trackBar) 1px;
+    height: 6rem;
 }
 .volume{
     width: 95% !important;
     height: 2rem;
     /* right: 0; */
-    bottom: 5.7rem;
+    bottom: 6rem;
     margin-right: 0 !important;
     background-color: transparent;
     box-shadow: none;
@@ -409,7 +409,7 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
 .volumeSeeker{
     width: 100%;
     height: 100%;
-    /* margin-bottom: 55%; */
+    margin:0 !important;
 }
 
 .trackDetails{

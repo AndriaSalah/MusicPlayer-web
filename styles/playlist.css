@@ -1,4 +1,7 @@
 /* play list css and songs */
+*{
+    text-size-adjust: none;
+}
 .playlist{
     margin: 0rem 6rem 2rem 3.5rem !important;
     display: flex;
@@ -50,6 +53,8 @@
     color:black;
     /* iphone fix */
     text-align: center;
+
+
 }
 .song .buttons .addbutton{
     background-color: transparent;
