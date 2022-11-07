@@ -100,8 +100,10 @@ export function switchTheme(theme){
     
         RemoveActiveTheme(orignalTheme)
         addActiveTheme(theme)
+        
                 orignalTheme = themeNumber
                 themeNumber = theme
+                switchColor(pseudoColors,"pseudo")
                 switchColor(body,"body")
                 switchColor(htmlqueue,"border")
                 switchColor(shuffleButton,"accent")
@@ -112,7 +114,6 @@ export function switchTheme(theme){
                 switchColor(volumeButton,"accent")
                 switchColor(volumepanel,"body")
                 switchColor(expandbutton,"accent")
-                switchColor(pseudoColors,"pseudo")
                 palleteButton.style.backgroundColor = colorLibrary[themeNumber].trackthumb
                 if(expanded){
                     pallets.style.backgroundColor = colorLibrary[themeNumber].trackthumb

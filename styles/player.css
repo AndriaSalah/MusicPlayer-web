@@ -3,6 +3,7 @@
   --trackBar:#0085e5c7;
   --trackThumb:#4f89df;
 
+
 }
 .player{
     width: 100%;
@@ -363,6 +364,10 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
 }
 
 @media only screen and (max-width :690px){
+
+.player .pallets{
+  bottom: 6.5rem;
+}
 .player .expandedplayer{
     flex-direction: row-reverse;
     width: auto;

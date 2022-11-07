@@ -2,6 +2,7 @@ import { MusicLibraries } from "/scripts/albums.js"
 import { volumeseeker } from "./Volume.js"
 import { showQueue, updateQueueView, viewOnQueue } from "./queue.js"
 import { ChangeTitleColor, chooseTheme, orignalTheme, removeOldTheme, switchColor, switchTheme, themeNumber } from "./ThemeManager.js"
+import { body } from "./playerExpansion.js"
 
 
 
@@ -80,8 +81,6 @@ function createSong(songName,artistName,artPath,index){
     PLplayButtonImg.classList.add("fa-play")
     PLplayButton.appendChild(PLplayButtonImg);
     PLplayButton.addEventListener('click',() => playat(index+1));
-    
-
 
     buttons.appendChild(addButton);
     buttons.appendChild(PLplayButton);
@@ -421,6 +420,19 @@ function loadLibrary(libraryNumber){
     
 }
 
+function removeLoadingScreen(){
+    let loadingContainer = document.querySelector(".loadingContainer")
+    let loadingScreen = document.querySelector(".spinner")
+    loadingScreen.style.opacity , loadingContainer.style.opacity = 0
+    loadingScreen.style.visibility , loadingContainer.style.visibility = 'hidden'
+   
+    
+}
+
+window.addEventListener('load',()=>{
+   let timer = setTimeout(()=>removeLoadingScreen(),300)
+})
+  
 
 currentTrack.preload = 'metadata'
 playbutton.addEventListener('click',() =>play());
@@ -486,12 +498,14 @@ loadTrack()
 
 else{
     
-    initPrevSess()    
+    initPrevSess()
+
     for ( var i = 0 ; i < MusicLibraries[currentLibrary].length ; i ++) {
         var songDetails = MusicLibraries[currentLibrary][i]
         createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
         
     }
+
     
     QueueSong = previousSession.QueueSong
     nowplaying = document.querySelector(`.song:nth-of-type(${currentIndex+1})`)

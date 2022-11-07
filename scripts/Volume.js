@@ -37,8 +37,8 @@ function setvolume(){
 
 
 volumeButton.addEventListener('click',() =>showvolumepanel());
-volumepanel.addEventListener('mouseenter'||'touchstart',()=>{console.log('enter'), clearInterval(volumePanelTimer)})
-volumepanel.addEventListener('mouseleave'||'touchend',()=>{alert('leave'), volumePanelTimer = setInterval(()=>showvolumepanel(),3000)})
-volumeseeker.addEventListener('touchstart',()=>{clearInterval(volumePanelTimer)})
-volumeseeker.addEventListener('touchend',()=>{volumePanelTimer = setInterval(()=>showvolumepanel(),3000)})
+volumepanel.addEventListener('mouseenter',()=>{console.log('enter'), clearInterval(volumePanelTimer)})
+volumepanel.addEventListener('mouseleave',()=>{volumePanelTimer = setInterval(()=>showvolumepanel(),3000)})
+volumeseeker.addEventListener('touchstart',()=>{clearInterval(volumePanelTimer)},{passive : true})
+volumeseeker.addEventListener('touchend',()=>{volumePanelTimer = setInterval(()=>showvolumepanel(),3000),{passive : true}})
 volumeseeker.addEventListener('input',() => setvolume());
