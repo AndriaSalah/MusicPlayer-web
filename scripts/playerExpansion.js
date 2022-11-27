@@ -18,23 +18,30 @@ export let expandbutton    = document.querySelector('.expand')
         player.style.height = '100%'
         player.style.flexDirection = 'column'
         player.style.zIndex = 3
-        body.style.overflowY = 'hidden'
+       
         expandbutton.style.transform = 'rotate(180deg)'
         pallets.style.visibility = "hidden"
         pallets.style.opacity = 0
         if (mobile){
             expandedplayer.style.flexDirection = 'row'
-
+            body.style.position = 'fixed'
         }
         else{
             volumepanel.style.bottom = '15%'
             volumepanel.style.right = '33.5%'
+            body.style.overflowY = 'hidden'
         }
     }
     else{
         player.removeAttribute('style') 
         player.style.zIndex = 3
-        body.style.overflowY = '' 
+        body.style.position= 'static' 
+        if(mobile){
+            body.style.position = 'static'
+        }
+        else{
+            body.style.overflowY = ''
+        }
         expandbutton.style.transform = 'rotate(0)'
         expandedplayer.removeAttribute('style') 
         volumepanel.removeAttribute('style') 

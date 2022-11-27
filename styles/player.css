@@ -11,7 +11,7 @@
     align-items: center;
     position: sticky;
     bottom: 0;
-    height: 7.3rem;
+    height: 7rem;
     background-color: rgba(24, 24, 24, 1) ;
     justify-content: space-evenly;
     z-index: 0; 
@@ -366,7 +366,7 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
 @media only screen and (max-width :690px){
 
 .player .pallets{
-  bottom: 6.5rem;
+  bottom: 7rem;
 }
 .player .expandedplayer{
     flex-direction: row-reverse;
@@ -397,7 +397,7 @@ input[type=range].trackseeker:focus::-ms-fill-upper {
 }
 .player {
     border-top: solid var(--trackBar) 1px;
-    height: 6rem;
+    height: 6.5rem;
 }
 .volume{
     width: 95% !important;

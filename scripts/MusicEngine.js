@@ -6,25 +6,26 @@ import { body } from "./playerExpansion.js"
 
 
 
-export let currentTrack    = document.createElement('audio')
-let trackseeker            = document.querySelector('.trackseeker')
-export let playerimg       = document.querySelector('.playerImg')
-let playlist               = document.querySelector('.playlist') 
-let playerTrackName        = document.querySelector('.playerTrackName')
-export let currentTime     = document.querySelector('.currentTime')
-export let totalDuration   = document.querySelector('.totalDuration')
-export let shuffleButton          = document.querySelector('.shuffleButton')
-let playerPlayButton       = document.querySelector('.playbutton i')
-export let playbutton             = document.querySelector('.playbutton')
-export let prv                    = document.querySelector('.prev') 
-export let nxt                    = document.querySelector('.next') 
-let rocklibrary            = document.querySelector('.rock')
-let poplibrary             = document.querySelector('.pop')
-let mixlibrary             = document.querySelector('.dailyMix')
-let imaginelibrary         = document.querySelector('.imagineDragons')
-let sadnchill              = document.querySelector('.sadNchill')
-export let queuebutton            = document.querySelector('.queuebutton')
-export let shuffling              = false
+export let currentTrack = document.createElement('audio')
+let trackseeker = document.querySelector('.trackseeker')
+export let playerimg = document.querySelector('.playerImg')
+let playlist = document.querySelector('.playlist') 
+let playerTrackName = document.querySelector('.playerTrackName')
+export let currentTime = document.querySelector('.currentTime')
+export let totalDuration = document.querySelector('.totalDuration')
+export let shuffleButton = document.querySelector('.shuffleButton')
+let playerPlayButton = document.querySelector('.playbutton i')
+export let playbutton = document.querySelector('.playbutton')
+export let prv = document.querySelector('.prev') 
+export let nxt = document.querySelector('.next') 
+let rocklibrary = document.querySelector('.rock')
+let poplibrary = document.querySelector('.pop')
+let mixlibrary = document.querySelector('.dailyMix')
+let imaginelibrary = document.querySelector('.imagineDragons')
+let sadnchill = document.querySelector('.sadNchill')
+export let queuebutton = document.querySelector('.queuebutton')
+let toast = document.querySelector(".toast")
+export let shuffling = false
 let rand_check             = false
 let currentIndex           = 0
 let isplaying              = false
@@ -341,10 +342,12 @@ export function NowPlaying(index,operation){
 
 function addToQueue(index){
 Queue.push(MusicLibraries[currentLibrary][index]) 
-    jSuites.notification({
-        name: 'Queue',
-        message: 'Added song Successfully',
-    })
+    toast.style.opacity = 1
+    toast.style.visibility = "visible"
+    let x = setTimeout(() => {
+        toast.style.opacity = 0
+        toast.style.visibility = "hidden"
+    }, 2000);
     viewOnQueue(MusicLibraries[currentLibrary][index])
 }
 
