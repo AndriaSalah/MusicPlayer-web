@@ -44,29 +44,22 @@ function createSong(songName,artistName,artPath,index){
     var song = document.createElement('div');
     song.classList.add('song');
     playlist.appendChild(song);
-
-    var trackArt = document.createElement('img');
     if (artPath != ''){
-     trackArt.src = artPath;
+        song.innerHTML+=`<img src=${artPath}>`
     }
-    else trackArt.src = '/Music/Artwork/default.png'
-
-    var trackDetails = document.createElement('div');
-    trackDetails.classList.add('trackDetails');
-
-    var trackArtist = document.createElement('h3')
-    trackArtist.textContent = artistName;
-
-    var trackname = document.createElement('h2');
-    trackname.textContent = songName;
-
-    trackDetails.appendChild(trackname);
-    trackDetails.appendChild(trackArtist);
-    
-
+    else {
+        song.innerHTML+=`<img src="/Music/Artwork/default.png">`
+    }
+    song.innerHTML += 
+    `
+    <div class="trackDetails">
+        <h2>${songName}</h2>
+        <h3>${artistName}</h3>
+    </div>
+    `
+        
     var buttons = document.createElement('div');
     buttons.classList.add('buttons');
-    
     
     var addButton = document.createElement('button');
     addButton.classList.add('addbutton');
@@ -75,26 +68,20 @@ function createSong(songName,artistName,artPath,index){
     addbuttonImg.classList.add("fa-plus")
     addButton.appendChild(addbuttonImg)
     addButton.addEventListener('click',() => addToQueue(index));
-    var PLplayButton = document.createElement('button');;
-    var PLplayButtonImg = document.createElement('i');
-    PLplayButtonImg.classList.add("fa-solid")
-    PLplayButtonImg.classList.add("fa-play")
-    PLplayButton.appendChild(PLplayButtonImg);
-    PLplayButton.addEventListener('click',() => playat(index+1));
+
+    var PlayListplayButton = document.createElement('button');;
+    var PlayListplayButtonImg = document.createElement('i');
+    PlayListplayButtonImg.classList.add("fa-solid")
+    PlayListplayButtonImg.classList.add("fa-play")
+    PlayListplayButton.appendChild(PlayListplayButtonImg);
+    PlayListplayButton.addEventListener('click',() => playat(index+1));
 
     buttons.appendChild(addButton);
-    buttons.appendChild(PLplayButton);
-    
-    var linebreak = document.createElement('hr');
-
-    song.appendChild(trackArt);
-    song.appendChild(trackDetails);
+    buttons.appendChild(PlayListplayButton);
     song.appendChild(buttons);
     
-    
+    var linebreak = document.createElement('hr');
     playlist.appendChild(linebreak);
-
-    
 
 }    
 
@@ -163,39 +150,39 @@ function highlightLibrary(){
     switch(nowplayinglibrary){
         case 0 :    
         if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')
-        librarytitle = document.querySelector('.rock #libraryTitle')
-        ChangeTitleColor()
-        libraryspan  = document.querySelector('.rock span')
-        libraryspan.style.opacity = 1
-        break
+            librarytitle = document.querySelector('.rock #libraryTitle')
+            ChangeTitleColor()
+            libraryspan  = document.querySelector('.rock span')
+            libraryspan.style.opacity = 1
+            break
         case 1 :  
-        if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')
-        librarytitle = document.querySelector('.pop #libraryTitle')
-        ChangeTitleColor()
-        libraryspan  = document.querySelector('.pop span')
-        libraryspan.style.opacity = 1
-        break     
+            if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')
+            librarytitle = document.querySelector('.pop #libraryTitle')
+            ChangeTitleColor()
+            libraryspan  = document.querySelector('.pop span')
+            libraryspan.style.opacity = 1
+            break     
         case 2 :   
-        if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style') 
-        librarytitle = document.querySelector('.imagineDragons #libraryTitle')
-        ChangeTitleColor()
-        libraryspan  = document.querySelector('.imagineDragons span')
-        libraryspan.style.opacity = 1
-        break
+            if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style') 
+            librarytitle = document.querySelector('.imagineDragons #libraryTitle')
+            ChangeTitleColor()
+            libraryspan  = document.querySelector('.imagineDragons span')
+            libraryspan.style.opacity = 1
+            break
         case 3 : 
-        if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')   
-        librarytitle = document.querySelector('.sadNchill #libraryTitle')
-        ChangeTitleColor()
-        libraryspan  = document.querySelector('.sadNchill span')
-        libraryspan.style.opacity = 1
+            if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')   
+            librarytitle = document.querySelector('.sadNchill #libraryTitle')
+            ChangeTitleColor()
+            libraryspan  = document.querySelector('.sadNchill span')
+            libraryspan.style.opacity = 1
         break    
         case 4 :
-        if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')
-        librarytitle = document.querySelector('.dailyMix #libraryTitle')
-        ChangeTitleColor() 
-        libraryspan  = document.querySelector('.dailyMix span')
-        libraryspan.style.opacity = 1
-        break     
+            if(librarytitle!=null)librarytitle.removeAttribute('style'),libraryspan.removeAttribute('style')
+            librarytitle = document.querySelector('.dailyMix #libraryTitle')
+            ChangeTitleColor() 
+            libraryspan  = document.querySelector('.dailyMix span')
+            libraryspan.style.opacity = 1
+            break     
     }
 }
 
@@ -216,10 +203,8 @@ function next(){
                 }
                 else {play()}
                 oldIndex = currentIndex + 1
-
             }
             else {
-               
                 NowPlaying(currentIndex,'remove')
                 currentIndex = 0 
                 nowPlayingSong.index = currentIndex
@@ -237,7 +222,6 @@ function next(){
         else shuffle()
     }
     else{
-        
         loadTrack(null)
         if(isplaying){
             currentTrack.play()
@@ -464,7 +448,20 @@ window.addEventListener('unload',()=>{
     localStorage.setItem('previousSession',JSON.stringify(previousSession))
 })    
 
-
+document.body.addEventListener('keyup', function(event) {
+    switch(event.key){
+        case "MediaTrackNext" :
+            next();
+            break;
+        case "MediaTrackPrevious":
+            prev();
+            break;
+        case "MediaPlayPause":
+            play();
+            break; 
+    }
+    
+  });
 function initPrevSess(){
     currentIndex = previousSession.nowPlayingSong.index
     nowPlayingSong.index = previousSession.nowPlayingSong.index

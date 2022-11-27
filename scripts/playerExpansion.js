@@ -1,4 +1,4 @@
-import  {  playerimg, currentTime, totalDuration }  from "./musiclibrary.js";
+import  {  playerimg, currentTime, totalDuration }  from "./MusicEngine.js";
 import  { volumepanel } from "./Volume.js";
 import  { htmlqueue, queueshown, showQueue } from "./queue.js";
 import { pallets } from "./ThemeManager.js";

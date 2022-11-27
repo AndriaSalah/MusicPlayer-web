@@ -1,4 +1,4 @@
-import { librarytitle, nowplaying, NowPlaying, nxt, playbutton, prv, queuebutton, shuffleButton, shuffling } from "./musiclibrary"
+import { librarytitle, nowplaying, NowPlaying, nxt, playbutton, prv, queuebutton, shuffleButton, shuffling } from "./MusicEngine"
 import { body, expandbutton } from "./playerExpansion"
 import { volumeButton, volumepanel, volumeshown } from "./Volume"
 import { htmlqueue } from "./queue"

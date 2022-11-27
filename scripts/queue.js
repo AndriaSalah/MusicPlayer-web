@@ -1,4 +1,4 @@
-import { queuebutton } from "./musiclibrary.js"
+import { queuebutton } from "./MusicEngine.js"
 
 export let htmlqueue = document.querySelector('.queue')
 export let queueshown = false
