@@ -474,7 +474,7 @@ function initPrevSess(){
     volumeseeker.value = previousSession.volume * 100
     currentTrack.volume = volumeseeker.value / 100
     nowplayinglibrary = previousSession.nowplayinglibrary
-    if(previousSession.shuffleState == true) enableshuffle()
+    
     
 
 
@@ -530,5 +530,6 @@ else{
     currentTrack.currentTime = previousSession.tracktime
     highlightLibrary()
     switchTheme(previousSession.themeNumber)
+    if(previousSession.shuffleState == true) enableshuffle()
 }    
 //----------------------------------------------------------------------------------------------------

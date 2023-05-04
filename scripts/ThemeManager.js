@@ -20,7 +20,6 @@ colorButton1.addEventListener('click',()=> switchTheme(1))
 colorButton2.addEventListener('click',()=> switchTheme(2))
 colorButton3.addEventListener('click',()=> switchTheme(3))
 
-
 let colorLibrary=[
     {
         //default
