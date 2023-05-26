@@ -2,8 +2,7 @@ import { MusicLibraries } from "/scripts/albums.js"
 import { volumeseeker } from "./Volume.js"
 import { showQueue, updateQueueView, viewOnQueue } from "./queue.js"
 import { ChangeTitleColor, chooseTheme, orignalTheme, removeOldTheme, switchColor, switchTheme, themeNumber } from "./ThemeManager.js"
-
-
+import { body } from "./playerExpansion.js"
 
 
 
@@ -483,23 +482,20 @@ function initPrevSess(){
 // initialising the default playlist and setting the volume to 20 % and loading the tracks from the playlists
 currentTrack.volume = volumeseeker.value / 100
 let previousSession = JSON.parse(localStorage.getItem('previousSession'))
-
 if(previousSession == null){
-        console.log(MusicLibraries[4])
 for ( var i = 0 ; i < MusicLibraries[4].length ; i ++) {
     var songDetails = MusicLibraries[4][i]
     createSong(songDetails.trackName , songDetails.artistName , songDetails.imgPath , i);
     highlightLibrary()
 }
-    
-    
+
 
 nowplaying = document.querySelector('.song:nth-of-type(1)')
 nowplaying.classList.add('nowplayingd')
 playListPlayButton = document.querySelector(`.song:nth-of-type(1) button:nth-of-type(2) i`)
 loadTrack()
-}
 
+}
 
 else{
     
