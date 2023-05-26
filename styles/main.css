@@ -148,7 +148,7 @@ a {
     background-repeat: no-repeat;
     background-size: cover;
 }
-/* the details that will be displayed when on the Music library when hovered  */
+/* the details that will be displayed when the Music library is hovered  */
 .details {
     border-radius: 10px;
     display: none;
