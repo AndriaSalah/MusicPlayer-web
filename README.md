@@ -7,7 +7,7 @@ that should exist in a music player, if u like it, leave a star on it
 
 ## Features
 
-- Choose between different colors and accents for the website (WIP)
+- Choose between different colors and accents for the website
 - Shuffle , next , prev , pause and play 
 - Queue --> view Queue , add to Queue 
 - Last session is saved so u can come back to where you were
